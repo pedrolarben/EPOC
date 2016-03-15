@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_id": "epoc-125118",
+    "project_number": "1046869462357",
+    "name": "EPOC"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046869462357:android:8ece4d2278cd5c4c",
+        "client_id": "android:amigosdevaro.com.epoc",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "amigosdevaro.com.epoc",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1046869462357-muj0gvmg05ckvt2qhsrqfei7ir57h6sh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
