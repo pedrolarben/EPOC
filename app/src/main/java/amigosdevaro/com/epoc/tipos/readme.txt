@@ -1,0 +1,1 @@
+clases relacionadas con todos los tipos, sus clases e interfaces (estilo FP)
