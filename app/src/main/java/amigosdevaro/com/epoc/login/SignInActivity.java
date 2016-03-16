@@ -6,6 +6,7 @@ package amigosdevaro.com.epoc.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -34,6 +35,12 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+
 import amigosdevaro.com.epoc.R;
 
 
@@ -55,7 +62,7 @@ public class SignInActivity extends AppCompatActivity implements
                 setContentView(R.layout.activity_login);
 
                 // Views
-                mStatusTextView = (TextView) findViewById(R.id.status);
+                //mStatusTextView = (TextView) findViewById(R.id.status);
 
                 // Button listeners
                 findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -66,9 +73,29 @@ public class SignInActivity extends AppCompatActivity implements
                 // Configure sign-in to request the user's ID, email address, and basic
                 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestEmail()
+                        .requestIdToken(getString(R.string.server_client_id)).requestEmail()
                         .build();
                 // [END configure_signin]
+
+                /*
+                HttpURLConnection httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("https://yourbackend.example.com/tokensignin");
+
+                try {
+                        List nameValuePairs = new ArrayList(1);
+                        nameValuePairs.add(new BasicNameValuePair("idToken", idToken));
+                        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        HttpResponse response = httpClient.execute(httpPost);
+                        int statusCode = response.getStatusLine().getStatusCode();
+                        final String responseBody = EntityUtils.toString(response.getEntity());
+                        Log.i(TAG, "Signed in as: " + responseBody);
+                } catch (ClientProtocolException e) {
+                        Log.e(TAG, "Error sending ID token to backend.", e);
+                } catch (IOException e) {
+                        Log.e(TAG, "Error sending ID token to backend.", e);
+                }
+*/
 
                 // [START build_client]
                 // Build a GoogleApiClient with access to the Google Sign-In API and the
@@ -139,7 +166,15 @@ public class SignInActivity extends AppCompatActivity implements
                         // Signed in successfully, show authenticated UI.
                         GoogleSignInAccount acct = result.getSignInAccount();
                         mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+                        String personName = acct.getDisplayName();
+                        String personEmail = acct.getEmail();
+                        String personId = acct.getId();
+                        String idToken = acct.getIdToken();
+                        Uri personPhoto = acct.getPhotoUrl();
                         updateUI(true);
+
+
+
                 } else {
                         // Signed out, show unauthenticated UI.
                         updateUI(false);
@@ -192,7 +227,7 @@ public class SignInActivity extends AppCompatActivity implements
         private void showProgressDialog() {
                 if (mProgressDialog == null) {
                         mProgressDialog = new ProgressDialog(this);
-                        mProgressDialog.setMessage(getString(R.string.loading));
+                        //mProgressDialog.setMessage(getString(R.string.loading));
                         mProgressDialog.setIndeterminate(true);
                 }
 
@@ -210,7 +245,7 @@ public class SignInActivity extends AppCompatActivity implements
                         findViewById(R.id.sign_in_button).setVisibility(View.GONE);
                         findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
                 } else {
-                        mStatusTextView.setText(R.string.signed_out);
+                        //mStatusTextView.setText(R.string.signed_out);
 
                         findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
                         findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
@@ -232,4 +267,4 @@ public class SignInActivity extends AppCompatActivity implements
                 }
         }
 }
-}
+

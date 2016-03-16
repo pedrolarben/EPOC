@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_id": "epoc-125118",
-    "project_number": "1046869462357",
+    "project_id": "epoc-1252",
+    "project_number": "748087088724",
     "name": "EPOC"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1046869462357:android:8ece4d2278cd5c4c",
+        "mobilesdk_app_id": "1:748087088724:android:8ece4d2278cd5c4c",
         "client_id": "android:amigosdevaro.com.epoc",
         "client_type": 1,
         "android_client_info": {
@@ -17,7 +17,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1046869462357-muj0gvmg05ckvt2qhsrqfei7ir57h6sh.apps.googleusercontent.com",
+          "client_id": "748087088724-89k7os5mg2ru6ig9f0ahbp6b0t4uuacv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "amigosdevaro.com.epoc",
+            "certificate_hash": "B00C0FF9BB4C5E881564F207C7C553D8B8209DB5"
+          }
+        },
+        {
+          "client_id": "748087088724-678acdgekdqepjmub9n05nd78l020l6c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,7 +43,7 @@
           "other_platform_oauth_client": []
         },
         "google_signin_service": {
-          "status": 1
+          "status": 2
         },
         "ads_service": {
           "status": 1
