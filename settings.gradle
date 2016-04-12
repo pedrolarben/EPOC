@@ -1,1 +1,1 @@
-include ':app', ':backendEPOC'
+include ':app'
