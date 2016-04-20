@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">EPOC</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="tabs"  >
+        <item
+            >Tab 1</item>
+        <item>
+            Tab 2
+        </item>
+        <item>
+            Tab3
+        </item>
+    </string-array>
 </resources>
