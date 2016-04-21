@@ -1,5 +1,6 @@
 package amigosdevaro.com.epoc;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Calendar;
+
+import amigosdevaro.com.epoc.DB_SQLite.DbHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DbHelper = new DbHelper(this);
-        SQLiteDataBase db = helper.getWritableDateBase();
+        DbHelper helper = new DbHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

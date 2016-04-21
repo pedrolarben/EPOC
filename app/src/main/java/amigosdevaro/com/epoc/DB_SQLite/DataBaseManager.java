@@ -21,7 +21,7 @@ public class DataBaseManager {
 
     public static final String TABLE_NAME_SO = "satoxigeno";
     public static final String CN_OID_SO = "oid_so";
-    public static final String CN_OID_PSO = "oid_p"
+    public static final String CN_OID_PSO = "oid_p";
     public static final String CN_FECHA_SO = "fecha";
     public static final String CN_VALOR_SO = "valor";
 
@@ -61,7 +61,7 @@ public class DataBaseManager {
 
     public static final String TABLE_NAME_F = "farmacos";
     public static final String CN_OID_F = "oid_f";
-    public static final String CN_OID_PF = "oid_p"
+    public static final String CN_OID_PF = "oid_p";
     public static final String CN_OID_POSF = "oid_pos";
     public static final String CN_NOMBRE_F = "nombre";
     public static final String CN_TIPO_F = "tipo";
@@ -77,7 +77,7 @@ public class DataBaseManager {
 
     public static final String TABLE_NAME_DYH = "diasyhoras";
     public static final String CN_OID_DH = "oid_dh";
-    public static final String CN_OID_POSDH = "oid_pos"
+    public static final String CN_OID_POSDH = "oid_pos";
     public static final String CN_DIA_DH = "dia";
     public static final String CN_HORA_DH = "hora";
 
@@ -90,8 +90,8 @@ public class DataBaseManager {
 
     public static final String TABLE_NAME_D = "descompensaciones";
     public static final String CN_OID_D = "oid_d";
-    public static final String CN_OID_PD = "oid_p"
-    public static final String CN_OID_SOD = "oid_so"
+    public static final String CN_OID_PD = "oid_p";
+    public static final String CN_OID_SOD = "oid_so";
     public static final String CN_FECHA_D = "fecha";
     public static final String CN_DISREA_D = "disrea";
     public static final String CN_TOS_D = "tos";
