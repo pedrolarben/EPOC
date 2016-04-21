@@ -24,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseManager.CREATE_TABLE_PACIENTES);
         db.execSQL(DataBaseManager.CREATE_TABLE_POSOLOGIAS);
         db.execSQL(DataBaseManager.CREATE_TABLE_FARMACOS);
-        db.execSQL(DataBaseManager.CREATE_TABLE_DIASYHORAS);
+        db.execSQL(DataBaseManager.CREATE_TABLE_FARMACOSTOMADOS);
         db.execSQL(DataBaseManager.CREATE_TABLE_SATOXIGENO);
         db.execSQL(DataBaseManager.CREATE_TABLE_DESCOMPENSACIONES);
 
