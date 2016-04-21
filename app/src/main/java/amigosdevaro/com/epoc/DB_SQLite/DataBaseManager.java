@@ -34,11 +34,30 @@ public class DataBaseManager {
 
     public static final String TABLE_NAME_POS = "posologias";
     public static final String CN_OID_POS = "oid_pos";
-    public static final String CN_ADMINISTRACIONFARMACO_POS = "administracionFarmaco"
+    public static final String CN_ADMINISTRACIONFARMACO_POS = "administracionFarmaco";
+    public static final String CN_CADA_POS = "cada";
+    public static final String CN_PRIMERA_POS = "primera";
+    public static final String CN_L_POS = "L";
+    public static final String CN_M_POS = "M";
+    public static final String CN_X_POS = "X";
+    public static final String CN_J_POS = "J";
+    public static final String CN_V_POS = "V";
+    public static final String CN_S_POS = "S";
+    public static final String CN_D_POS = "D";
+    
 
     public static final String CREATE_TABLE_POSOLOGIAS = "create table " +TABLE_NAME_POS+ " ("
             +CN_OID_POS+ " integer primary key autoincrement,"
-            +CN_ADMINISTRACIONFARMACO_POS+ " text);";
+            +CN_ADMINISTRACIONFARMACO_POS+ " text,"
+            +CN_CADA_POS+ " integer,"
+            +CN_PRIMERA_POS+ " numeric,"
+            +CN_L_POS+ " numeric,"
+            +CN_M_POS+ " numeric,"
+            +CN_X_POS+ " numeric,"
+            +CN_J_POS+ " numeric,"
+            +CN_V_POS+ " numeric,"
+            +CN_S_POS+ " numeric,"
+            +CN_D_POS+ " numeric);";
 
     public static final String TABLE_NAME_F = "farmacos";
     public static final String CN_OID_F = "oid_f";
