@@ -2,6 +2,7 @@ package amigosdevaro.com.epoc.DB_SQLite;
 
 /**
  * Created by Alberto on 20/04/2016.
+ *
  */
 public class DataBaseManager {
 
