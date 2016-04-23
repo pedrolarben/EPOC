@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import java.util.Calendar;
 
 import amigosdevaro.com.epoc.DB_SQLite.DbHelper;
+import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DbHelper helper = new DbHelper(this);
-        SQLiteDatabase db = helper.getWritableDatabase();
+        EpocDB.initEpocDB(helper);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
