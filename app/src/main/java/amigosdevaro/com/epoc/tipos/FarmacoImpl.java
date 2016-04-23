@@ -34,4 +34,24 @@ public class FarmacoImpl {
     private Posologia posologia;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FarmacoImpl)) return false;
+
+        FarmacoImpl farmaco = (FarmacoImpl) o;
+
+        if (nombre != null ? !nombre.equals(farmaco.nombre) : farmaco.nombre != null) return false;
+        if (tipo != farmaco.tipo) return false;
+        return !(posologia != null ? !posologia.equals(farmaco.posologia) : farmaco.posologia != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nombre != null ? nombre.hashCode() : 0;
+        result = 31 * result + (tipo != null ? tipo.hashCode() : 0);
+        result = 31 * result + (posologia != null ? posologia.hashCode() : 0);
+        return result;
+    }
 }

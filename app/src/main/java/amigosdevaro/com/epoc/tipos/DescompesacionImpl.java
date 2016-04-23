@@ -1,14 +1,16 @@
 package amigosdevaro.com.epoc.tipos;
 
+import java.util.GregorianCalendar;
+
 /**
  * Created by Alberto on 16/03/2016.
  */
 public class DescompesacionImpl {
 
 
-    private LocalDate fecha;
+    private GregorianCalendar fecha;
     private Double fiebre;
-    private Integer disrea;
+    private Integer disnea;
     private Boolean tos;
     private SatOxigeno oxigeno;
     private Double fev;
@@ -22,13 +24,20 @@ public class DescompesacionImpl {
     private Boolean somnolencia;
 
 
-    public DescompesacionImpl(LocalDate fecha) {
+    public DescompesacionImpl(GregorianCalendar fecha) {
         this.fecha = fecha;
     }
 
-    private void checkdisrea(Integer d){
+    public DescompesacionImpl(int year, int month, int day, int hour, int minute){
+        fecha = new GregorianCalendar(year,month,day,hour,minute);
+    }
+
+
+
+
+    private void checkdisnea(Integer d){
         if(d<0 || d>4){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("disnea can not be <0 , >4");
         }
     }
 
@@ -38,11 +47,11 @@ public class DescompesacionImpl {
         }
     }
 
-    public LocalDate getFecha() {
+    public GregorianCalendar getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(GregorianCalendar fecha) {
         this.fecha = fecha;
     }
 
@@ -54,13 +63,13 @@ public class DescompesacionImpl {
         this.fiebre = fiebre;
     }
 
-    public Integer getDisrea() {
-        return disrea;
+    public Integer getDisnea() {
+        return disnea;
     }
 
-    public void setDisrea(Integer disrea) {
-        checkdisrea(disrea);
-        this.disrea = disrea;
+    public void setDisnea(Integer disnea) {
+        checkdisnea(disnea);
+        this.disnea = disnea;
     }
 
     public Boolean getTos() {
@@ -151,4 +160,55 @@ public class DescompesacionImpl {
     public void setDolorCabeza(Boolean dolorCabeza) {
         this.dolorCabeza = dolorCabeza;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DescompesacionImpl)) return false;
+
+        DescompesacionImpl that = (DescompesacionImpl) o;
+
+        if (fecha != null ? !fecha.equals(that.fecha) : that.fecha != null) return false;
+        if (fiebre != null ? !fiebre.equals(that.fiebre) : that.fiebre != null) return false;
+        if (disnea != null ? !disnea.equals(that.disnea) : that.disnea != null) return false;
+        if (tos != null ? !tos.equals(that.tos) : that.tos != null) return false;
+        if (oxigeno != null ? !oxigeno.equals(that.oxigeno) : that.oxigeno != null) return false;
+        if (fev != null ? !fev.equals(that.fev) : that.fev != null) return false;
+        if (expectoracion != null ? !expectoracion.equals(that.expectoracion) : that.expectoracion != null)
+            return false;
+        if (ruidosRespiratorios != null ? !ruidosRespiratorios.equals(that.ruidosRespiratorios) : that.ruidosRespiratorios != null)
+            return false;
+        if (hinchazonTobillos != null ? !hinchazonTobillos.equals(that.hinchazonTobillos) : that.hinchazonTobillos != null)
+            return false;
+        if (dolorPecho != null ? !dolorPecho.equals(that.dolorPecho) : that.dolorPecho != null)
+            return false;
+        if (estarIrritable != null ? !estarIrritable.equals(that.estarIrritable) : that.estarIrritable != null)
+            return false;
+        if (desorientacion != null ? !desorientacion.equals(that.desorientacion) : that.desorientacion != null)
+            return false;
+        if (dolorCabeza != null ? !dolorCabeza.equals(that.dolorCabeza) : that.dolorCabeza != null)
+            return false;
+        return !(somnolencia != null ? !somnolencia.equals(that.somnolencia) : that.somnolencia != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = fecha != null ? fecha.hashCode() : 0;
+        result = 31 * result + (fiebre != null ? fiebre.hashCode() : 0);
+        result = 31 * result + (disnea != null ? disnea.hashCode() : 0);
+        result = 31 * result + (tos != null ? tos.hashCode() : 0);
+        result = 31 * result + (oxigeno != null ? oxigeno.hashCode() : 0);
+        result = 31 * result + (fev != null ? fev.hashCode() : 0);
+        result = 31 * result + (expectoracion != null ? expectoracion.hashCode() : 0);
+        result = 31 * result + (ruidosRespiratorios != null ? ruidosRespiratorios.hashCode() : 0);
+        result = 31 * result + (hinchazonTobillos != null ? hinchazonTobillos.hashCode() : 0);
+        result = 31 * result + (dolorPecho != null ? dolorPecho.hashCode() : 0);
+        result = 31 * result + (estarIrritable != null ? estarIrritable.hashCode() : 0);
+        result = 31 * result + (desorientacion != null ? desorientacion.hashCode() : 0);
+        result = 31 * result + (dolorCabeza != null ? dolorCabeza.hashCode() : 0);
+        result = 31 * result + (somnolencia != null ? somnolencia.hashCode() : 0);
+        return result;
+    }
+    
 }

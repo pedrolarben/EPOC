@@ -1,6 +1,6 @@
-package tipos;
+package amigosdevaro.com.epoc.tipos;
 
-import java.time.LocalTime;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 public class PosologiaImpl {
@@ -8,14 +8,14 @@ public class PosologiaImpl {
 	
 	private Set<DiasSemana> diassemanas;
 	private int cadaCuantosDias;
-	private LocalTime primeraDosisHora;
+	private GregorianCalendar primeraDosisHora;
 	private AdministracionFarmaco administracion;
 	
-	public PosologiaImpl(Set<DiasSemana> d, int ccd, LocalTime pd, AdministracionFarmaco a){
-		diassemanas = d;
-		cadaCuantosDias = ccd;
-		primeraDosisHora = pd;
-		administracion = a;
+	public PosologiaImpl(Set<DiasSemana> setdiasemana, int cadaCuantosdias, GregorianCalendar primeradosishora, AdministracionFarmaco administra){
+		diassemanas = setdiasemana;
+		cadaCuantosDias = cadaCuantosdias;
+		primeraDosisHora = primeradosishora;
+		administracion = administra;
 	}
 	
 	public Set<DiasSemana> getDiassemanas() {
@@ -30,10 +30,10 @@ public class PosologiaImpl {
 	public void setCadaCuantosDias(int cadaCuantosDias) {
 		this.cadaCuantosDias = cadaCuantosDias;
 	}
-	public LocalTime getPrimeraDosisHora() {
+	public GregorianCalendar getPrimeraDosisHora() {
 		return primeraDosisHora;
 	}
-	public void setPrimeraDosisHora(LocalTime primeraDosisHora) {
+	public void setPrimeraDosisHora(GregorianCalendar primeraDosisHora) {
 		this.primeraDosisHora = primeraDosisHora;
 	}
 	public AdministracionFarmaco getAdministracion() {

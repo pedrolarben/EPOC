@@ -1,9 +1,13 @@
 package amigosdevaro.com.epoc.tipos;
 
+import android.net.Uri;
+
+import java.util.List;
+
 /**
  * Created by Alberto on 16/03/2016.
  */
-public class PacienteImpl extends Usuario {
+public class PacienteImpl /*extends Usuario*/ {
         private List<Farmaco> farmacos;
         private Double fev;
         private Integer disrea;
@@ -12,8 +16,8 @@ public class PacienteImpl extends Usuario {
         private List<Descompensacion> descompensaciones;
         private List<SatOxigeno>    satoxigeno;
 
-    public PacienteImpl(String email, String name, String id, Uri photo){
-        super(email, name, id, photo);
+    public PacienteImpl(){
+
     }
 
     public void setFarmacos(List<Farmaco> farmacos) {
@@ -40,7 +44,7 @@ public class PacienteImpl extends Usuario {
         this.hospitalizaciones = hospitalizaciones;
     }
 
-    public void setDescompensaciones(List<Descomposicion> descompensaciones) {
+    public void setDescompensaciones(List<Descompensacion> descompensaciones) {
         this.descompensaciones = descompensaciones;
     }
 
@@ -91,10 +95,43 @@ public class PacienteImpl extends Usuario {
             throw new IllegalArgumentException();
         }
     }
-    private void checkhospitalizaciones(integer h){
+    private void checkhospitalizaciones(Integer h){
         if(h<0){
             throw new IllegalArgumentException();
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PacienteImpl)) return false;
+
+        PacienteImpl paciente = (PacienteImpl) o;
+
+        if (farmacos != null ? !farmacos.equals(paciente.farmacos) : paciente.farmacos != null)
+            return false;
+        if (fev != null ? !fev.equals(paciente.fev) : paciente.fev != null) return false;
+        if (disrea != null ? !disrea.equals(paciente.disrea) : paciente.disrea != null)
+            return false;
+        if (actFisica != null ? !actFisica.equals(paciente.actFisica) : paciente.actFisica != null)
+            return false;
+        if (hospitalizaciones != null ? !hospitalizaciones.equals(paciente.hospitalizaciones) : paciente.hospitalizaciones != null)
+            return false;
+        if (descompensaciones != null ? !descompensaciones.equals(paciente.descompensaciones) : paciente.descompensaciones != null)
+            return false;
+        return !(satoxigeno != null ? !satoxigeno.equals(paciente.satoxigeno) : paciente.satoxigeno != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = farmacos != null ? farmacos.hashCode() : 0;
+        result = 31 * result + (fev != null ? fev.hashCode() : 0);
+        result = 31 * result + (disrea != null ? disrea.hashCode() : 0);
+        result = 31 * result + (actFisica != null ? actFisica.hashCode() : 0);
+        result = 31 * result + (hospitalizaciones != null ? hospitalizaciones.hashCode() : 0);
+        result = 31 * result + (descompensaciones != null ? descompensaciones.hashCode() : 0);
+        result = 31 * result + (satoxigeno != null ? satoxigeno.hashCode() : 0);
+        return result;
+    }
 }

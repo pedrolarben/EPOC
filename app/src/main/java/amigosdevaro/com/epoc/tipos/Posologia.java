@@ -1,12 +1,14 @@
-package tipos;
+package amigosdevaro.com.epoc.tipos;
 
-import java.time.LocalTime;
+
+import java.util.GregorianCalendar;
 import java.util.Set;
+import amigosdevaro.com.epoc.tipos.AdministracionFarmaco;
 
 public interface Posologia {
 	Set<DiasSemana> getDias();
 	int getCadaCuantosDias();
-	LocalTime getPrimeraDosisHora();
+	GregorianCalendar getPrimeraDosisHora();
 	AdministracionFarmaco getAdministracion();
 
 }
