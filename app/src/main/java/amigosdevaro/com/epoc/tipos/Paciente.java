@@ -9,7 +9,8 @@ public interface Paciente /*extends Usuario*/ {
 
     List<Farmaco> getFarmacos();
     Double getFev();
-    Integer getDisrea();
+    Integer getDisnea();
+    void setDisnea(Integer disnea);
     Integer getActFisica();
     Integer getHospitalizaciones();
     List<Descompensacion> getDescompensaciones();

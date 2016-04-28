@@ -2,6 +2,7 @@ package amigosdevaro.com.epoc.tipos;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,13 @@ public class PacienteImpl implements Paciente/*extends Usuario*/ {
         private List<SatOxigeno>    satoxigeno;
 
     public PacienteImpl(){
+        farmacos = new ArrayList<Farmaco>();
+        fev = 0.0;
+        disrea = 0;
+        actFisica = 0;
+        hospitalizaciones = 0;
+        descompensaciones = new ArrayList<Descompensacion>();
+        satoxigeno = new ArrayList<SatOxigeno>();
 
     }
 
@@ -29,7 +37,7 @@ public class PacienteImpl implements Paciente/*extends Usuario*/ {
         this.fev = fev;
     }
 
-    public void setDisrea(Integer disrea) {
+    public void setDisnea(Integer disrea) {
         checkdisrea(disrea);
         this.disrea = disrea;
     }
@@ -65,7 +73,7 @@ public class PacienteImpl implements Paciente/*extends Usuario*/ {
         return fev;
     }
 
-    public Integer getDisrea() {
+    public Integer getDisnea() {
         return disrea;
     }
 

@@ -9,6 +9,7 @@ import java.util.List;
 import amigosdevaro.com.epoc.tipos.Descompensacion;
 import amigosdevaro.com.epoc.tipos.Farmaco;
 import amigosdevaro.com.epoc.tipos.Paciente;
+import amigosdevaro.com.epoc.tipos.PacienteImpl;
 import amigosdevaro.com.epoc.tipos.Posologia;
 import amigosdevaro.com.epoc.tipos.SatOxigeno;
 
@@ -23,12 +24,26 @@ public  class EpocDB {
     public static void initEpocDB(DbHelper dbhelper){
         helper = dbhelper;
         //TODO: crear un paciente por defecto y añadir a  idPaciente (variable, mirar arriba)
+        Paciente user = new PacienteImpl();
+
+        SQLiteDatabase readableDB = helper.getWritableDatabase();
+        //si hemos abierto correctamente la db
+        if(readableDB!=null){
+           readableDB.execSQL("INSERT INTO pacientes (fev, disrea, actfisica, hospitalizaciones) VALUES ("+user.getFev()+","+user.getDisnea()+","+user.getActFisica()+","+user.getHospitalizaciones()+")");
+        }
+        //cerramos db
+        readableDB.close();
+
+
+
+        
     }
     /******************************
      PACIENTES
      *****************************/
     public static Paciente getPaciente(){
         //usar idPaciente
+
         //init variables
         Paciente res = null;//TODO
         //abrimos bd:
