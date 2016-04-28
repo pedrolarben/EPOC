@@ -2,14 +2,18 @@
     <string name="app_name">EPOC</string>
     <string name="action_settings">Settings</string>
 
-    <string-array name="tabs"  >
-        <item
-            >Tab 1</item>
+    <string-array name="tabs">
+        <item>APRENDE</item>
         <item>
-            Tab 2
+            DOSIS
         </item>
         <item>
-            Tab3
+            EJERCICIO
         </item>
     </string-array>
+    <string name="exacerbacion">EXACERBACIÓN</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

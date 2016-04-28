@@ -2,13 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF3377"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     tools:context="amigosdevaro.com.epoc.SwipeTabs.Fragment_a">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lstLista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Fragment A" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </FrameLayout>
