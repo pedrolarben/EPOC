@@ -11,7 +11,7 @@ public interface Descompensacion {
     Double getFiebre();
     Integer getDisrea();
     Boolean getTos();
-    SatOxigeno getSatOxigeno();
+    SatOxigeno getOxigeno();
     Double getFev();
     Boolean getExpectoracion();
     Boolean getRuidosRespiratorios();

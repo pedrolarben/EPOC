@@ -3,7 +3,7 @@ package amigosdevaro.com.epoc.tipos;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-public class PosologiaImpl {
+public class PosologiaImpl implements  Posologia {
 	
 	
 	private Set<DiasSemana> diassemanas;

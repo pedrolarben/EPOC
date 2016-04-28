@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by Alberto on 16/03/2016.
  */
-public class SatOxigenoImpl {
+public class SatOxigenoImpl implements SatOxigeno {
     private GregorianCalendar fecha;
     private Integer valor;
 

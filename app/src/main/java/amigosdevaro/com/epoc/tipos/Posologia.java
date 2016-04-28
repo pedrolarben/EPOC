@@ -6,7 +6,7 @@ import java.util.Set;
 import amigosdevaro.com.epoc.tipos.AdministracionFarmaco;
 
 public interface Posologia {
-	Set<DiasSemana> getDias();
+	Set<DiasSemana> getDiassemanas();
 	int getCadaCuantosDias();
 	GregorianCalendar getPrimeraDosisHora();
 	AdministracionFarmaco getAdministracion();

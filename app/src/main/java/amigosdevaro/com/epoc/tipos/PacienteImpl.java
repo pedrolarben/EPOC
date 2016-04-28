@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Alberto on 16/03/2016.
  */
-public class PacienteImpl /*extends Usuario*/ {
+public class PacienteImpl implements Paciente/*extends Usuario*/ {
         private List<Farmaco> farmacos;
         private Double fev;
         private Integer disrea;
@@ -77,7 +77,7 @@ public class PacienteImpl /*extends Usuario*/ {
         return descompensaciones;
     }
 
-    public List<SatOxigeno> getSatoxigeno() {
+    public List<SatOxigeno> getSatOxigeno() {
         return satoxigeno;
     }
     private void checkfev(Double f){
