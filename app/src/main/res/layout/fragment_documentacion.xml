@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    tools:context="amigosdevaro.com.epoc.SwipeTabs.Fragment_a">
+    app:theme="@style/ToolbarColoredBackArrow"
+    tools:context=".UI_Documentacion.DocumentacionFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lstLista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </FrameLayout>

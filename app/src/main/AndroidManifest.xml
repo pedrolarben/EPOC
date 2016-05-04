@@ -29,7 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TabsBarUI.MainActivityTabs"></activity>
+        <activity
+            android:name=".UI_Documentacion.PdfDocumentacionActivity"
+            android:label="@string/title_activity_pdf_documentacion"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

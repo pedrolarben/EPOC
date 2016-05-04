@@ -1,14 +1,12 @@
 package amigosdevaro.com.epoc.TabsBarUI;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import amigosdevaro.com.epoc.MedicinadUI.DisplayMedicinasFragment;
 import amigosdevaro.com.epoc.R;
+import amigosdevaro.com.epoc.UI_Documentacion.DocumentacionFragment;
 
 /**
  * Created by betipedro on 20/04/2016.
@@ -36,11 +34,13 @@ public class MiFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment= null;
         if(position==0){
-            fragment = new Fragment_a();
+
+            fragment = new DocumentacionFragment();
+
 
         }
         if(position==1){
-            fragment = /*new Fragment_b();*/new DisplayMedicinasFragment();
+            fragment = new Fragment_b();//new Fragment_b();
         }
         if(position==2){
             fragment = new Fragment_c();
