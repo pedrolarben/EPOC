@@ -1,0 +1,1 @@
+clases relacionadas a la base de datos local

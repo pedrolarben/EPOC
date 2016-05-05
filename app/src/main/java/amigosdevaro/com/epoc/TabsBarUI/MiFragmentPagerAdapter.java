@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import amigosdevaro.com.epoc.R;
 import amigosdevaro.com.epoc.UI_Documentacion.DocumentacionFragment;
+import amigosdevaro.com.epoc.UI_Medicinas.MedicinasFragment;
 
 /**
  * Created by betipedro on 20/04/2016.
@@ -40,7 +41,7 @@ public class MiFragmentPagerAdapter extends FragmentPagerAdapter {
 
         }
         if(position==1){
-            fragment = new Fragment_b();//new Fragment_b();
+            fragment = new MedicinasFragment();//new Fragment_b();
         }
         if(position==2){
             fragment = new Fragment_c();

@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import amigosdevaro.com.epoc.DB_SQLite.DbHelper;
+import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
 import amigosdevaro.com.epoc.TabsBarUI.MiFragmentPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DbHelper helper = new DbHelper(this);
+        EpocDB.initEpocDB(helper);
+
 
         toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
