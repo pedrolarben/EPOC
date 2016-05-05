@@ -7,4 +7,7 @@ public interface Farmaco {
     String getNombre();
     TipoFarmaco getTipo();
     Posologia getPosologia();
+    void setNombre(String s);
+    void setTipo(TipoFarmaco tf);
+    void setPosologia(Posologia p);
 }

@@ -8,4 +8,6 @@ import java.util.GregorianCalendar;
 public interface SatOxigeno {
         GregorianCalendar getFecha();
         Integer   getValor();
+        void setFecha(GregorianCalendar gc);
+        void setValor(Integer i);
 }

@@ -10,5 +10,10 @@ public interface Posologia {
 	int getCadaCuantosDias();
 	GregorianCalendar getPrimeraDosisHora();
 	AdministracionFarmaco getAdministracion();
+	void setDiassemanas(Set<DiasSemana> p);
+	void setCadaCuantosDias(int i);
+	void setPrimeraDosisHora(GregorianCalendar gc);
+	void setAdministracion(AdministracionFarmaco af);
+
 
 }

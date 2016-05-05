@@ -15,5 +15,11 @@ public interface Paciente /*extends Usuario*/ {
     Integer getHospitalizaciones();
     List<Descompensacion> getDescompensaciones();
     List<SatOxigeno>    getSatOxigeno();
+    void setFarmacos(List<Farmaco> l);
+    void setFev(Double f);
+    void setDescompensaciones(List<Descompensacion> li);
+    void setSatOxigeno(List<SatOxigeno> st);
+    void setActFisica(Integer in);
+    void setHospitalizaciones(Integer i);
 
 }
