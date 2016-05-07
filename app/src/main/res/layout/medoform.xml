@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:title="@string/nuevo_medicamento"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+
+      <EditText
+          android:id="@+id/nombre_farmaco"
+      android:layout_width="300dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:hint="Nombre Medicamento"
+      android:layout_marginTop="90dp"
+      android:autoText="false"
+      android:inputType="text"
+      android:textAlignment="center"
+      android:textSize="@dimen/texto_mediano"/>
+
+      <Spinner android:id="@+id/spinner_tipo"
+          android:layout_below="@+id/nombre_farmaco"
+      android:layout_width="250dp"
+      android:layout_height="22dp"
+      android:layout_marginTop="20dp"
+      android:layout_gravity="center"></Spinner>
+
+
+      <Spinner android:id="@+id/spinner_administracion"
+          android:layout_below="@+id/spinner_tipo"
+          android:layout_width="250dp"
+          android:layout_height="22dp"
+          android:layout_marginTop="30dp"
+          android:layout_gravity="center"></Spinner>
+
+
+
+      <Spinner android:id="@+id/spinner_dosiscada"
+          android:layout_below="@+id/spinner_tipo"
+          android:layout_width="250dp"
+          android:layout_height="22dp"
+          android:layout_marginTop="30dp"
+          android:layout_gravity="center"></Spinner>
+
+      <Button
+          android:layout_width="300dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="30dp"
+          android:layout_below="@+id/spinner_dosiscada"
+          android:text="Primera Dosis"
+          android:textAllCaps="false"
+          android:textAlignment="center"
+          android:layout_gravity="center"
+          android:onClick="selectHora"
+          android:id="@+id/btn_selecthour" />
+
+      <Button
+          android:layout_width="300dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_below="@+id/btn_selecthour"
+          android:text="Repetir"
+          android:textAllCaps="false"
+          android:textAlignment="center"
+          android:layout_gravity="center"
+          android:onClick="selectDiaSemana"/>
+
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+
+          <Button
+              android:id="@+id/btn_save"
+              android:textSize="@dimen/texto_mediano"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_alignParentBottom="true"
+              android:layout_marginRight="@dimen/fab_margin"
+              android:layout_marginBottom="@dimen/fab_margin"
+              android:text="@string/save" />
+
+
+          <Button
+              android:id="@+id/btn_cancel"
+              android:textSize="@dimen/texto_mediano"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_alignParentBottom="true"
+              android:layout_marginLeft="@dimen/fab_margin"
+              android:layout_marginBottom="@dimen/fab_margin"
+              android:text="@string/cancel" />
+
+      </RelativeLayout>
+  </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

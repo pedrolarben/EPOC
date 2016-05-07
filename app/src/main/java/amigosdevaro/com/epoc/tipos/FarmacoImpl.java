@@ -3,8 +3,9 @@ package amigosdevaro.com.epoc.tipos;
 /**
  * Created by Alberto on 18/04/2016.
  */
-public class FarmacoImpl {
+public class FarmacoImpl implements Farmaco{
     private String nombre;
+
     private TipoFarmaco tipo;
 
     public String getNombre() {
@@ -34,6 +35,12 @@ public class FarmacoImpl {
     private Posologia posologia;
 
 
+    public FarmacoImpl(String n, TipoFarmaco tp, Posologia po){
+        this.nombre=n;
+        this.tipo=tp;
+        this.posologia=po;
+
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

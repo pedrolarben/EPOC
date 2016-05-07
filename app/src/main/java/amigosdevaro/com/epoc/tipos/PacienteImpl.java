@@ -1,13 +1,12 @@
 package amigosdevaro.com.epoc.tipos;
 
-import android.net.Uri;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Alberto on 16/03/2016.
  */
-public class PacienteImpl /*extends Usuario*/ {
+public class PacienteImpl implements Paciente/*extends Usuario*/ {
         private List<Farmaco> farmacos;
         private Double fev;
         private Integer disrea;
@@ -17,6 +16,13 @@ public class PacienteImpl /*extends Usuario*/ {
         private List<SatOxigeno>    satoxigeno;
 
     public PacienteImpl(){
+        farmacos = new ArrayList<Farmaco>();
+        fev = 0.0;
+        disrea = 0;
+        actFisica = 0;
+        hospitalizaciones = 0;
+        descompensaciones = new ArrayList<Descompensacion>();
+        satoxigeno = new ArrayList<SatOxigeno>();
 
     }
 
@@ -29,7 +35,7 @@ public class PacienteImpl /*extends Usuario*/ {
         this.fev = fev;
     }
 
-    public void setDisrea(Integer disrea) {
+    public void setDisnea(Integer disrea) {
         checkdisrea(disrea);
         this.disrea = disrea;
     }
@@ -48,7 +54,7 @@ public class PacienteImpl /*extends Usuario*/ {
         this.descompensaciones = descompensaciones;
     }
 
-    public void setSatoxigeno(List<SatOxigeno> satoxigeno) {
+    public void setSatOxigeno(List<SatOxigeno> satoxigeno) {
         this.satoxigeno = satoxigeno;
     }
 
@@ -65,7 +71,7 @@ public class PacienteImpl /*extends Usuario*/ {
         return fev;
     }
 
-    public Integer getDisrea() {
+    public Integer getDisnea() {
         return disrea;
     }
 
@@ -77,7 +83,7 @@ public class PacienteImpl /*extends Usuario*/ {
         return descompensaciones;
     }
 
-    public List<SatOxigeno> getSatoxigeno() {
+    public List<SatOxigeno> getSatOxigeno() {
         return satoxigeno;
     }
     private void checkfev(Double f){

@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="amigosdevaro.com.epoc.MainActivity">
+
+    <item android:id="@+id/action_exacerbacion"
+        android:icon="@drawable/hospital"
+        app:showAsAction="always|withText"
+        android:title="@string/exacerbacion"
+        android:orderInCategory="0"/>
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

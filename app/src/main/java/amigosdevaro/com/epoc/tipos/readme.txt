@@ -1,1 +1,1 @@
-clases relacionadas con todos los tipos, sus clases e interfaces (estilo FP)
+clases relacionadas a la base de datos local

@@ -1,4 +1,95 @@
 <resources>
     <string name="app_name">EPOC</string>
     <string name="action_settings">Settings</string>
+
+    <string name="doc_url">http://epoc-documentacion.azurewebsites.net/</string>
+    <string name="doc_url_local">file:///android_asset/</string>
+
+    <string-array name="tabs">
+        <item>APRENDE</item>
+        <item>
+            DOSIS
+        </item>
+        <item>
+            EJERCICIO
+        </item>
+    </string-array>
+
+    <string name="exacerbacion">EXACERBACIÓN</string>
+    <string name="mis_medicamentos">Mis Medicamentos</string>
+    <string name="nuevo_medicamento">Nuevo Medicamento</string>
+    <string-array name="url_doc">
+        <item>que-es-la-epoc.html</item>
+        <item>inhaladores.html</item>
+        <item>habitos-saludables.html</item>
+        <item>agudizaciones.html</item>
+        <item>recursos-educativos.html</item>
+        <item>index.html</item>
+    </string-array>
+
+
+    <string-array name="indice_doc">
+        <item>¿Qué es la EPOC?</item>
+        <item>Inhaladores</item>
+        <item>Hábitos saludables</item>
+        <item>Cómo controlar las agudizaciones</item>
+        <item>Recursos educativos</item>
+        <item>Otros</item>
+    </string-array>
+
+    <string name="escoger_tipo">Tipo Medicamento</string>
+    <string name="nombre_medicamento">Nombre</string>
+    <string name="add_medicamento">Añadir Medicamento</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+
+    <string-array name="dias">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
+
+
+    <string-array name="tipo_farmaco">
+        <item>Broncodilatadores</item>
+        <item>Corticoides</item>
+        <item>Antibióticos</item>
+        <item>Mucolíticos</item>
+        <item>Anti-inflamatorios</item>
+        <item>Diuréticos</item>
+        <item>Otros</item>
+    </string-array>
+
+    <string-array name="administracion">
+        <item>Inhalador</item>
+        <item>Vía-Oral</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="horas">
+        <item>1 h</item>
+        <item>2 hs</item>
+        <item>3 hs</item>
+        <item>4 hs</item>
+        <item>5 hs</item>
+        <item>6 hs</item>
+        <item>7 hs</item>
+        <item>8 hs</item>
+        <item>9 hs</item>
+        <item>10 hs</item>
+        <item>11 hs</item>
+        <item>12 hs</item>
+    </string-array>
+
+    <string name="cada">cada</string>
+    <string name="hora">hora</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_pdf_documentacion">pdfDocumentacionActivity</string>
+
 </resources>
