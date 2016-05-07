@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public class DisplayMeds extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_meds);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.diplay_med_toolbar);
+        setSupportActionBar(toolbar);
 
         datos = EpocDB.getFarmacos();
         recyclerView = (RecyclerView) findViewById(R.id.displayMed_lista);
@@ -42,17 +45,18 @@ public class DisplayMeds extends AppCompatActivity {
         final AdaptadorDisplayMed adaptador = new AdaptadorDisplayMed(datos);
 
         recyclerView.setAdapter(adaptador);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.action_add_medicine);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final FloatingActionButton addMedicina = (FloatingActionButton) findViewById(R.id.action_add_medicine);
+        addMedicina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 startActivity(new Intent(DisplayMeds.this, MedForm.class));
             }
         });
+
+
 
     }
 

@@ -49,13 +49,7 @@ public class MedicinasFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
 
-        FloatingActionButton addMedicina = (FloatingActionButton) view.findViewById(R.id.medicinafragment_add);
-        addMedicina.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DisplayMeds.class));
-            }
-        });
+
 
         return view;
     }

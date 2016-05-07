@@ -16,7 +16,8 @@
     </string-array>
 
     <string name="exacerbacion">EXACERBACIÓN</string>
-
+    <string name="mis_medicamentos">Mis Medicamentos</string>
+    <string name="nuevo_medicamento">Nuevo Medicamento</string>
     <string-array name="url_doc">
         <item>que-es-la-epoc.html</item>
         <item>inhaladores.html</item>

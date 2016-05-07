@@ -5,7 +5,8 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 app:theme="@style/ToolbarColoredBackArrow"
-tools:context=".UI_Medicinas.MedicinasFragment">
+tools:context=".UI_Medicinas.MedicinasFragment"
+    android:background="@drawable/form_xhdpi">
 
 <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
@@ -14,13 +15,7 @@ tools:context=".UI_Medicinas.MedicinasFragment">
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/medicinafragment_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+
 
 
 

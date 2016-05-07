@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -103,7 +104,8 @@ public class MedForm extends AppCompatActivity {
                     //EpocDB.addFarmacoTomado(farmaco,new GregorianCalendar() );//BORRAR
 
                     //Goes back to main activity
-                    startActivity(new Intent(MedForm.this, MainActivity.class));
+                    finish();
+                    startActivity(new Intent(MedForm.this, DisplayMeds.class));
                 }
 
 
@@ -119,7 +121,8 @@ public class MedForm extends AppCompatActivity {
                 //En este caso no se guarda nada.
                 //TODO: evitar que con la flechita atras del movil se entre en un ciclo de ida y vuelta.
                 //Goes back to main activity
-                startActivity(new Intent(MedForm.this, MainActivity.class));
+                finish();
+                startActivity(new Intent(MedForm.this, DisplayMeds.class));
 
             }
         });
@@ -216,6 +219,21 @@ public class MedForm extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+
+            Intent intent = new Intent(MedForm.this, DisplayMeds.class);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            finish();
+            startActivity(intent);
+            return true;
+        }
+        return false;
+    }
 
     //Metodo onCLick del boton 1 dosis
     //TODO: probar que esto funciona correctamente.

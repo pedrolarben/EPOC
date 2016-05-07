@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:theme="@style/ToolbarColoredBackArrow"
-    tools:context=".UI_Documentacion.DocumentacionFragment">
+    tools:context=".UI_Documentacion.DocumentacionFragment"
+    android:background="@drawable/aprende_xhdpi">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
