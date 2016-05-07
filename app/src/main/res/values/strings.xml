@@ -26,6 +26,7 @@
         <item>recursos-educativos.html</item>
         <item>index.html</item>
     </string-array>
+    <string name="cargando_documentacion">Cargando...</string>
 
 
     <string-array name="indice_doc">
