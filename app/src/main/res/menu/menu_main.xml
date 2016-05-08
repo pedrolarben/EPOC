@@ -4,7 +4,7 @@
     tools:context="amigosdevaro.com.epoc.MainActivity">
 
     <item android:id="@+id/action_exacerbacion"
-        android:icon="@drawable/hospital"
+        android:icon="@drawable/hospital2"
         app:showAsAction="always|withText"
         android:title="@string/exacerbacion"
         android:orderInCategory="0"/>

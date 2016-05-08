@@ -6,7 +6,7 @@ android:layout_height="match_parent"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 app:theme="@style/ToolbarColoredBackArrow"
 tools:context=".UI_Medicinas.MedicinasFragment"
-    android:background="@drawable/form_xhdpi">
+    android:background="@drawable/form_mdpi">
 
 <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView

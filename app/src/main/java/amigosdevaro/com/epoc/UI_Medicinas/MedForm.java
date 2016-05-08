@@ -22,8 +22,9 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
+
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
-import amigosdevaro.com.epoc.MainActivity;
+import amigosdevaro.com.epoc.tipos.DiasSemana;
 import amigosdevaro.com.epoc.R;
 import amigosdevaro.com.epoc.tipos.AdministracionFarmaco;
 
@@ -222,6 +223,7 @@ public class MedForm extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
+
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {
 
@@ -232,7 +234,10 @@ public class MedForm extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-        return false;
+        else{
+            return super.onKeyDown(keyCode,event);
+        }
+
     }
 
     //Metodo onCLick del boton 1 dosis
