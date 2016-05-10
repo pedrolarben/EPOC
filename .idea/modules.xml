@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EPOC-master-merging.iml" filepath="$PROJECT_DIR$/EPOC-master-merging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EPOC-105.iml" filepath="$PROJECT_DIR$/EPOC-105.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
