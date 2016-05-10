@@ -98,6 +98,9 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
             final Farmaco frmaco = f;
             diasSemanas += " - "+itemView.getResources().getString(R.string.cada);
             diasSemanas += " " +cada+" "+itemView.getResources().getString(R.string.hora);
+            if(cada>1){
+                diasSemanas+="s";
+            }
             txtDias.setText(diasSemanas);
 
             buttonDelete.setOnClickListener(this);
