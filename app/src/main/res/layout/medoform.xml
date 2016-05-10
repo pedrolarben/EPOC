@@ -81,7 +81,7 @@
           android:layout_width="300dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
-          android:layout_below="@+id/btn_selecthour"
+          android:id="@+id/btn_selectWeek"
           android:text="Repetir"
           android:textAllCaps="false"
           android:textAlignment="center"

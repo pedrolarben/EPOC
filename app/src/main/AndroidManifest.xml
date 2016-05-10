@@ -37,12 +37,14 @@
         <activity
             android:name=".UI_Medicinas.DisplayMeds"
             android:label="DisplayMeds"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"></activity>
 
         <activity
             android:name=".UI_Medicinas.MedForm"
             android:label="Formulario"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".UI_Medicinas.DisplayMeds"></activity>
 
 
     </application>

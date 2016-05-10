@@ -2,6 +2,7 @@ package amigosdevaro.com.epoc.UI_Medicinas;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -26,17 +27,22 @@ public class DisplayMeds extends AppCompatActivity {
     RecyclerView recyclerView;
     private List<Farmaco> datos;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_meds);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.diplay_med_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.display_med_toolbar);
         setSupportActionBar(toolbar);
+        //Barra Arriba
+        getSupportActionBar().setTitle("Mis medicamentos");
+
+        //Añadiendo flechita atras:
+        final Drawable upArrow = getResources().getDrawable(R.drawable.arrow_left);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
         datos = EpocDB.getFarmacos();
         recyclerView = (RecyclerView) findViewById(R.id.displayMed_lista);
@@ -56,75 +62,6 @@ public class DisplayMeds extends AppCompatActivity {
             }
         });
 
-
-
     }
-
-    //Adapted to update the UI with the new task stored in the database:
-
-    /*To see the updated data, you need to call the updateUI() method
-    every time the underlying data of the app changes.*/
-
-    private void updateUI(){
-
-        //Now we have to fetch all the data from the database and show it in the main view.
-       // ArrayList<String> taskList = new ArrayList<>();
-
-
-        /*For what I see it seems like we are creating a cursor and while there's an entry for a task in our databse tasks table we make sure such task is displayed.*/
-      /*  Cursor cursor = db.query(TaskContract.TaskEntry.TABLE,
-                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COL_TASK_TITLE},
-                null, null, null, null, null);
-        while (cursor.moveToNext()) {
-            int idx = cursor.getColumnIndex(TaskContract.TaskEntry.COL_TASK_TITLE);
-            //The tasks are added into this array of strings.
-            taskList.add(cursor.getString(idx));
-        }
-
-        if (mAdapter == null) {
-            mAdapter = new ArrayAdapter<>(this,
-                    R.layout.item_todo,//The view to use for the items.
-                    R.id.task_title,//The place where to put the String of data.
-                    taskList);//Where to get all the data from.
-            //TODO: Check out what the adapter of a view means in android.
-            mTaskListView.setAdapter(mAdapter);//Set it as the adapter of the ListView instance.
-        } else {
-
-            /*If the adapter is already created, which implies that's already asssigned to the
-            * ListView , clear it, re-populate it and notify the vieew that the data has changed.
-            * This means that the view will repaint on the screen with the new data*/
-         /*   mAdapter.clear();
-            mAdapter.addAll(taskList);
-            mAdapter.notifyDataSetChanged();
-        }
-
-        cursor.close();
-        db.close();*/
-    }
-
-
-    //When the done button in item_todo.xml is clicked it calls this method:
-    /*public void deleteTask(View view){
-        //TODO: Find out what it's meant by the parent of a view
-        View parent = (View) view.getParent();
-
-        TextView taskTextView = (TextView) parent.findViewById(R.id.task_title);
-
-        //Task name:
-
-        String task = String.valueOf(taskTextView.getText());
-
-        //Updating the database, removing the entry:
-
-        SQLiteDatabase db = mHelper.getWritableDatabase();
-        db.delete(TaskContract.TaskEntry.TABLE,TaskContract.TaskEntry.COL_TASK_TITLE+"=?",new String[]{task});
-
-        db.close();
-
-        //Update UI after we have deleted it:
-
-        this.updateUI();
-    }*/
-
 
 }

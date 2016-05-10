@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import amigosdevaro.com.epoc.tipos.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -37,6 +40,8 @@ public class MedForm extends AppCompatActivity {
     private Calendar calendar;
 
 
+
+
     //Datos recogidos del formulario
 
     //Para crear un Farmaco se necesita esta info:
@@ -46,8 +51,8 @@ public class MedForm extends AppCompatActivity {
 
     //Posologia:
     private Set<DiasSemana> Semana = new HashSet<DiasSemana>();
-    int dosisCada = 24;
-    private GregorianCalendar primeraDosis;
+    int dosisCada = -1;
+    private GregorianCalendar primeraDosis = new GregorianCalendar();
 
     //Objetos que crear con estos campos luego:
     Posologia posologia;
@@ -63,6 +68,23 @@ public class MedForm extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Cambiar el background de los botones a uno mas cool:
+
+        Button btn1 = (Button) findViewById(R.id.btn_selecthour);
+        Button btn2 = (Button) findViewById(R.id.btn_selectWeek);
+        Button btn3 = (Button) findViewById(R.id.btn_save);
+        Button btn4 = (Button) findViewById(R.id.btn_cancel);
+
+        btn1.setBackgroundResource(android.R.drawable.btn_default);
+        btn2.setBackgroundResource(android.R.drawable.btn_default);
+        btn3.setBackgroundResource(android.R.drawable.btn_default);
+        btn4.setBackgroundResource(android.R.drawable.btn_default);
+
+
+
+        //Cambiando titulo toolbar:
+        //TODO: pensar que poner
+        getSupportActionBar().setTitle("Mi Medicina");
 
         //Form buttons:
 
@@ -71,35 +93,50 @@ public class MedForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Toast message = Toast.makeText(getApplicationContext(),"Los campos de Tipo y Administración del Farmaco deben rellenarse.",Toast.LENGTH_SHORT);
+                //Se comprueba que el formulario se relleno al completo antes de guardar los datos.
 
-                //TODO: comprobar que el formulario se relleno al completo antes de guardar los datos.
 
-                boolean comprobacion;
 
-                if(Semana.isEmpty()){
-                    comprobacion = false;
+                if(tipoFarmaco == null || administracionFarmaco==null|| tipoFarmaco == TipoFarmaco._TOFIX_ || administracionFarmaco==AdministracionFarmaco._TOFIX_){
+                    message.show();
                 }
 
-                if(true){
+               else if(Semana.isEmpty()){
+                    message.setText("Elige al menos un Dia de la Semana.");
+                    message.show();
+                }
+
+                 else{
                     //Cojo los datos del nombre del medicamento del campo de texto:
                     EditText nombreMed = (EditText) findViewById(R.id.nombre_farmaco);
                     nombreMedicamento = nombreMed.getText().toString();
 
-                    //TODO: tratar si el nombre esta empty
-
                     //Por defecto le doy el nombre del tipo de farmaco en general.
-                    if(nombreMedicamento.isEmpty()){
+                    if(nombreMedicamento.trim().isEmpty()){
                         //Por defecto le doy el nombre del tipo de farmaco.
                         nombreMedicamento = tipoFarmaco.toString();
                     }
+
+
+                    //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
+                    for(Farmaco x: EpocDB.getFarmacos()){
+
+                        //Si existe le cambio el nombre:
+                        if(x.getNombre().equals(nombreMedicamento)){
+                            nombreMedicamento += "*";
+                        }
+                    }
+
+                    //TODO: Preguntar a varo si el ya hace algo cuando la dosis es cada -1 IMPORTANTE.
+
+
+
                     posologia = new PosologiaImpl(Semana,dosisCada,primeraDosis,administracionFarmaco);
                     farmaco = new FarmacoImpl(nombreMedicamento,tipoFarmaco,posologia);
 
 
                     //Save new data
-                    //TODO: salvar en base de datos.
-
-
                     EpocDB.addFarmaco(farmaco);
 
                     //EpocDB.addFarmacoTomado(farmaco,new GregorianCalendar() );//BORRAR
@@ -120,7 +157,6 @@ public class MedForm extends AppCompatActivity {
             public void onClick(View v) {
 
                 //En este caso no se guarda nada.
-                //TODO: evitar que con la flechita atras del movil se entre en un ciclo de ida y vuelta.
                 //Goes back to main activity
                 finish();
                 startActivity(new Intent(MedForm.this, DisplayMeds.class));
@@ -132,8 +168,6 @@ public class MedForm extends AppCompatActivity {
         //Managing spinners:
         //Adapter: adapta los strings a vistas:
 
-        //TODO: comprobar que se seleccionan correctamente los valores, por lo visto el OnItemSelected listener tambien se ejecuta al principio.
-
         //Tipo spinner
 
         Spinner tipo = (Spinner) findViewById(R.id.spinner_tipo);
@@ -144,7 +178,6 @@ public class MedForm extends AppCompatActivity {
         tipo.setAdapter(new NothingSelectedSpinnerAdapter(tipoAdapter, R.layout.nadaseleccionado_tipofarmaco, this));
 
         //Listener:
-
         tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -157,7 +190,6 @@ public class MedForm extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //TODO: que pasa si no selecciona
                 tipoFarmaco = null;
             }
         });
@@ -186,7 +218,6 @@ public class MedForm extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //TODO: que pasa si no selecciona
                 administracionFarmaco = null;
             }
         });
@@ -211,8 +242,7 @@ public class MedForm extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //TODO: que pasa si no selecciona
-                dosisCada = 24;
+                dosisCada = -1;
             }
         });
 
@@ -243,9 +273,10 @@ public class MedForm extends AppCompatActivity {
     //Metodo onCLick del boton 1 dosis
     //TODO: probar que esto funciona correctamente.
     public void selectHora(View view) {
-
         //Cojo el tiempo actual.
         calendar = Calendar.getInstance();
+
+        final Button pDosis = (Button) findViewById(R.id.btn_selecthour);
 
         TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -254,6 +285,8 @@ public class MedForm extends AppCompatActivity {
                 //Los guardo con un GregorianCalendar, el año mes y dia de semana lo saco del tiempo actual.
                 primeraDosis = new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_WEEK), hora, minuto);
+                pDosis.setBackgroundColor(Color.parseColor("#FF5722"));
+
             }
         };
 
@@ -267,7 +300,13 @@ public class MedForm extends AppCompatActivity {
     //Metodo onClick del boton repetir
     public void selectDiaSemana(View view) {
 
+        //Por si se llama mas de una vez nos conviene limpiar el set de dias cada vez,
+        //Para que luego funcionen los checkers.
+        Semana.clear();
         final String[] dias = getResources().getStringArray(R.array.dias);
+
+        //boton que cambiar color:
+        final Button repetir = (Button) findViewById(R.id.btn_selectWeek);
 
         //Me lo tuve que inventar sino al clicar dos veces se caia la app.
         final boolean[] waschecked = new boolean[dias.length];
@@ -284,6 +323,7 @@ public class MedForm extends AppCompatActivity {
 
                 if (waschecked[which]) {
                     isChecked = false;
+                    waschecked[which] = false;
                 } else {
                     waschecked[which] = true;
                 }
@@ -296,11 +336,16 @@ public class MedForm extends AppCompatActivity {
 
                 //En el caso de que se acepte cojo los datos
                 //Me fijo en los valores del array de booleanos:
-
+                int count=0;
                 for(int i = 0; i<waschecked.length;i++){
                     if(waschecked[i]){
                         Semana.add(DiasSemana.values()[i]);
+                       count++;
                     }
+                }
+                if(count!=0){
+                repetir.setBackgroundColor(Color.parseColor("#FF5722"));} else {
+                    repetir.setBackgroundResource(android.R.drawable.btn_default);
                 }
 
 
@@ -309,9 +354,13 @@ public class MedForm extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Lo que hace el boton de cancelar
-                //TODO: que hacemos si cancela lo de los dias.
+                repetir.setBackgroundResource(android.R.drawable.btn_default);
+
             }
         });
+
+
+
 
         builder.create();
         builder.show();
