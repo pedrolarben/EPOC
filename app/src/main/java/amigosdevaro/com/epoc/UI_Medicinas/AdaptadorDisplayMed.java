@@ -1,5 +1,7 @@
 package amigosdevaro.com.epoc.UI_Medicinas;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +12,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
 import amigosdevaro.com.epoc.R;
 import amigosdevaro.com.epoc.tipos.DiasSemana;
 import amigosdevaro.com.epoc.tipos.Farmaco;
+import amigosdevaro.com.epoc.tipos.FarmacoImpl;
 
 /**
  * Created by betipedro on 05/05/2016.
@@ -50,7 +54,7 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
     /*************************************
      *  VIEWHOLDER
      *************************************/
-    public static class ViewHolderDisplayMed extends RecyclerView.ViewHolder{
+    public  class ViewHolderDisplayMed extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
         private TextView txtNombre ;
@@ -60,8 +64,10 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
         private ImageButton buttonEdit;
         private Integer cada = -1;
 
+
         public ViewHolderDisplayMed(final View itemView){
             super(itemView);
+
             txtNombre = (TextView) itemView.findViewById(R.id.displaymed_nombre);
             txtDias = (TextView) itemView.findViewById(R.id.displaymed_diassemana);
             txtTipo = (TextView) itemView.findViewById(R.id.displaymed_tipo);
@@ -89,17 +95,13 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
                     diasSemanas+="  "+dia.toString();
                 }
             }
+            final Farmaco frmaco = f;
             diasSemanas += " - "+itemView.getResources().getString(R.string.cada);
             diasSemanas += " " +cada+" "+itemView.getResources().getString(R.string.hora);
             txtDias.setText(diasSemanas);
 
-            buttonDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //TODO eliminar el farmaco de la base de datos EpodDB.removeFarmaco(f);
-                    Log.d("DISPLAYMED", "deleted");
-                }
-            });
+            buttonDelete.setOnClickListener(this);
+
             buttonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -108,6 +110,21 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
                 }
             });
 
+
         }
+
+        @Override
+        public void onClick(View v) {
+            Farmaco f = new FarmacoImpl((String)this.txtNombre.getText(),null,null);
+            EpocDB.eliminaFarmaco(f);
+            removeAt(getAdapterPosition());
+        }
+    }
+    public void removeAt(int position){
+        datos.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+        Log.d("remove", position + " eliminado");
+        notifyItemRangeChanged(position, datos.size()-1);
     }
 }
