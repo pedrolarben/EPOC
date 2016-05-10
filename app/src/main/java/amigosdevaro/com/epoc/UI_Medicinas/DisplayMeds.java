@@ -2,6 +2,7 @@ package amigosdevaro.com.epoc.UI_Medicinas;
 
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -37,10 +38,12 @@ public class DisplayMeds extends AppCompatActivity {
         getSupportActionBar().setTitle("Mis medicamentos");
 
         //Añadiendo flechita atras:
-        final Drawable upArrow = getResources().getDrawable(R.drawable.arrow_left);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
 
 

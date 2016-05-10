@@ -6,7 +6,10 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -58,6 +61,8 @@ public class MedForm extends AppCompatActivity {
     Posologia posologia;
     Farmaco farmaco;
 
+    int accentColor;
+
 
     /*Lo que es obligatorio rellenar es: Dias, tipoFarmaco, administracionFarmaco, primeraDosis*/
 
@@ -68,7 +73,21 @@ public class MedForm extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Flechita
+        //Barra Arriba
+        getSupportActionBar().setTitle("Mis medicamentos");
+
+        //Añadiendo flechita atras:
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         //Cambiar el background de los botones a uno mas cool:
+
+        accentColor = ContextCompat.getColor(this, R.color.colorAccent);
 
         Button btn1 = (Button) findViewById(R.id.btn_selecthour);
         Button btn2 = (Button) findViewById(R.id.btn_selectWeek);
@@ -93,7 +112,7 @@ public class MedForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast message = Toast.makeText(getApplicationContext(),"Los campos de Tipo y Administración del Farmaco deben rellenarse.",Toast.LENGTH_SHORT);
+                Toast message = Toast.makeText(getApplicationContext(),"Los campos de Tipo y Administración del Farmaco deben rellenarse.",Toast.LENGTH_LONG);
                 //Se comprueba que el formulario se relleno al completo antes de guardar los datos.
 
 
@@ -110,21 +129,27 @@ public class MedForm extends AppCompatActivity {
                  else{
                     //Cojo los datos del nombre del medicamento del campo de texto:
                     EditText nombreMed = (EditText) findViewById(R.id.nombre_farmaco);
-                    nombreMedicamento = nombreMed.getText().toString();
+                    nombreMedicamento = nombreMed.getText().toString().trim();
 
                     //Por defecto le doy el nombre del tipo de farmaco en general.
-                    if(nombreMedicamento.trim().isEmpty()){
+                    if(nombreMedicamento.isEmpty()){
                         //Por defecto le doy el nombre del tipo de farmaco.
                         nombreMedicamento = tipoFarmaco.toString();
                     }
 
 
                     //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
+
+                    int repetido = 1;
                     for(Farmaco x: EpocDB.getFarmacos()){
 
                         //Si existe le cambio el nombre:
                         if(x.getNombre().equals(nombreMedicamento)){
-                            nombreMedicamento += "*";
+                            repetido++;
+                            if(repetido>2){
+                                nombreMedicamento = nombreMedicamento.substring(0,nombreMedicamento.length()-3);
+                            }
+                            nombreMedicamento += "("+repetido+")";
                         }
                     }
 
@@ -285,7 +310,8 @@ public class MedForm extends AppCompatActivity {
                 //Los guardo con un GregorianCalendar, el año mes y dia de semana lo saco del tiempo actual.
                 primeraDosis = new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_WEEK), hora, minuto);
-                pDosis.setBackgroundColor(Color.parseColor("#FF5722"));
+
+                pDosis.setBackgroundColor(accentColor);
 
             }
         };
@@ -344,7 +370,7 @@ public class MedForm extends AppCompatActivity {
                     }
                 }
                 if(count!=0){
-                repetir.setBackgroundColor(Color.parseColor("#FF5722"));} else {
+                repetir.setBackgroundColor(accentColor);} else {
                     repetir.setBackgroundResource(android.R.drawable.btn_default);
                 }
 

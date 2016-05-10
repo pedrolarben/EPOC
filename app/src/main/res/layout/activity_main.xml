@@ -55,7 +55,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorAccentDark"
+        app:backgroundTint="@color/colorAccent"
         android:tint="@android:color/white"/>
 
 

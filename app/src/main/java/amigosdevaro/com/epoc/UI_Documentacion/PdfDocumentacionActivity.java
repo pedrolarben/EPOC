@@ -54,10 +54,10 @@ public class PdfDocumentacionActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
 
 
-        final Drawable upArrow = getResources().getDrawable(R.drawable.arrow_left);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
     }
