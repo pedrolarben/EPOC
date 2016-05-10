@@ -15,7 +15,7 @@
         android:id="@+id/view">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/diplay_med_toolbar"
+            android:id="@+id/display_med_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:title="@string/mis_medicamentos"
