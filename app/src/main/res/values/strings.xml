@@ -6,7 +6,9 @@
     <string name="doc_url_local">file:///android_asset/</string>
 
     <string-array name="tabs">
-        <item>APRENDE</item>
+        <item>
+            APRENDE
+        </item>
         <item>
             DOSIS
         </item>

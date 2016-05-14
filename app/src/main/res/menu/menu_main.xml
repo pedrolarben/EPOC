@@ -14,4 +14,9 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item android:id="@+id/action_mis_medicamentos"
+        android:icon="@drawable/pill_white"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:title="@string/mis_medicamentos"/>
 </menu>

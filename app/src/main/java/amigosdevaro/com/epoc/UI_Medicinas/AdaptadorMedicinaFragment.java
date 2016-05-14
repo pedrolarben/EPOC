@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import amigosdevaro.com.epoc.R;
@@ -53,6 +54,7 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
 
         private TextView txtNombre ;
         private TextView txtTipo ;
+        private TextView txtHora;
         private ImageButton buttonTomado;
 
 
@@ -60,6 +62,7 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
             super(itemView);
             txtNombre = (TextView) itemView.findViewById(R.id.medicinafragment_nombre);
             txtTipo = (TextView) itemView.findViewById(R.id.medicinafragment_tipo);
+            txtHora = (TextView) itemView.findViewById(R.id.medicinafragment_hora);
             buttonTomado= (ImageButton) itemView.findViewById(R.id.medicinafragment_tomado);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -76,7 +79,15 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
 
             txtNombre.setText(f.getNombre());
             txtTipo.setText(f.getTipo().toString());
-
+            String hora = ""+f.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY);
+            String minutos = ""+f.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE);
+            if(hora.length()<2){
+                hora="0"+hora;
+            }
+            if(minutos.length()<2){
+                minutos="0"+minutos;
+            }
+            txtHora.setText(hora+":"+minutos);
             //TODO if ( farmaco ya esta tomado) cambiar el boton por un tic ./
 
 
