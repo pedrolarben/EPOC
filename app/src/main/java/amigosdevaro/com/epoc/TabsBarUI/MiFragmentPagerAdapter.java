@@ -5,10 +5,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import amigosdevaro.com.epoc.MainActivity;
 import amigosdevaro.com.epoc.R;
 import amigosdevaro.com.epoc.UI_Documentacion.DocumentacionFragment;
+import amigosdevaro.com.epoc.UI_Ejercico.EjercicioFragment;
 import amigosdevaro.com.epoc.UI_Medicinas.MedicinasFragment;
 
 /**
@@ -27,6 +29,8 @@ public class MiFragmentPagerAdapter extends FragmentPagerAdapter {
 
     }
 
+
+
     @Override
     public CharSequence getPageTitle(int position) {
 
@@ -40,7 +44,6 @@ public class MiFragmentPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment= null;
         if(position==0){
             MainActivity.fabVisible = false;
-
             fragment = new DocumentacionFragment();
 
 
@@ -53,8 +56,11 @@ public class MiFragmentPagerAdapter extends FragmentPagerAdapter {
         if(position==2){
 
             MainActivity.fabVisible = false;
-            fragment = new Fragment_c();
+            fragment = new EjercicioFragment();
         }
+
+       // MainActivity.tab_index=position;
+
         return fragment;
     }
 

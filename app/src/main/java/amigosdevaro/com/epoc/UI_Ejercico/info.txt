@@ -1,0 +1,11 @@
+ejercicio
+
+-Programa de ejercicio.
+- ¿por qué debo practicar ejercicio?
+- ¿Qué tipo de ejercicio me conviene?
+- mi diario de caminatas
+    ·Fecha
+    ·Duración
+    ·Escala disnea de Borg : [(sin disnea,0),(Muy Ligera, practicamente no se nata, 0.5),(Muy ligera,1),(Ligera,2),(Moderada,3),(en ocaciones severa,4),(Severa,5),(Muy Severa, 7),(Muy Severa, en ocaciones máxima,9),(Máxima, 10)]
+    ·Ejercicios de brazo :(SI, no)
+    ·observaciones
