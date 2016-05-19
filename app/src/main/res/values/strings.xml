@@ -39,6 +39,18 @@
         <item>Recursos educativos</item>
         <item>Otros</item>
     </string-array>
+    <string-array name="indice_ejercicio">
+        <item>Programa de ejercicios</item>
+        <item>Mi diario de caminatas</item>
+        <item>¿Por qué debo practicar ejercicio?</item>
+        <item>¿Qué tipo de ejercicio me conviene?</item>
+    </string-array>
+    <string-array name="url_ejercicio">
+        <item>index.html</item>
+        <item>index.html</item>
+        <item>por-que-ejercicio.html</item>
+        <item>que-ejercicio.html</item>
+    </string-array>
 
     <string name="escoger_tipo">Tipo Medicamento</string>
     <string name="nombre_medicamento">Nombre</string>

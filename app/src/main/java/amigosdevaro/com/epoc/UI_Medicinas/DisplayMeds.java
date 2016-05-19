@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import java.security.AccessController;
 import java.util.List;
 
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
@@ -51,7 +52,7 @@ public class DisplayMeds extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.displayMed_lista);
         recyclerView.setHasFixedSize(true);
 
-        final AdaptadorDisplayMed adaptador = new AdaptadorDisplayMed(datos);
+        final AdaptadorDisplayMed adaptador = new AdaptadorDisplayMed(datos, this);
 
         recyclerView.setAdapter(adaptador);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

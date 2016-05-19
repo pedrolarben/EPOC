@@ -16,6 +16,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import amigosdevaro.com.epoc.R;
 
 public class PdfDocumentacionActivity extends AppCompatActivity {
@@ -39,18 +42,26 @@ public class PdfDocumentacionActivity extends AppCompatActivity {
         webSettings.setDisplayZoomControls(false);
 
         String text = "";
+        Integer posText = 0;
+        String title ="";
 
         Intent intent = getIntent();
-        Integer posText = intent.getIntExtra("PDF_URL", -1);
-        if (posText != -1) {
-            text = getResources().getStringArray(R.array.url_doc)[posText];
+        if(intent.hasExtra("PDF_URL")){
+            text = getTextDocumentation(intent).get(0);
+            posText = new Integer(getTextDocumentation(intent).get(1));
+            title = getResources().getStringArray(R.array.indice_doc)[posText];
+        }
+        if(intent.hasExtra("PDF_URL_ejercicio")){
+            text = getTextEjercicio(intent).get(0);
+            posText = new Integer(getTextEjercicio(intent).get(1));
+           title = getResources().getStringArray(R.array.indice_ejercicio)[posText];
         }
 
         url = getResources().getString(R.string.doc_url_local) + text;
 
         this.loadWebViewUrl(url);
 
-        String title = getResources().getStringArray(R.array.indice_doc)[posText];
+
         getSupportActionBar().setTitle(title);
 
 
@@ -60,6 +71,28 @@ public class PdfDocumentacionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+    }
+    private List<String> getTextDocumentation(Intent intent){
+        String text="";
+        Integer posText = intent.getIntExtra("PDF_URL", -1);
+        if (posText != -1) {
+            text = getResources().getStringArray(R.array.url_doc)[posText];
+        }
+        List<String> ls = new ArrayList<String>();
+        ls.add(text);
+        ls.add(posText.toString());
+        return ls;
+    }
+    private List<String> getTextEjercicio(Intent intent){
+        String text="";
+        Integer posText = intent.getIntExtra("PDF_URL_ejercicio", -1);
+        if (posText != -1) {
+            text = getResources().getStringArray(R.array.url_ejercicio)[posText];
+        }
+        List<String> ls = new ArrayList<String>();
+        ls.add(text);
+        ls.add(posText.toString());
+        return ls;
     }
     private void loadWebViewUrl(String url){
         progressDialog = new ProgressDialog(PdfDocumentacionActivity.this);

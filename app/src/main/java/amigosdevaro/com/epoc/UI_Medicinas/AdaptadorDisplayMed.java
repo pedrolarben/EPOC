@@ -1,5 +1,7 @@
 package amigosdevaro.com.epoc.UI_Medicinas;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -23,9 +25,11 @@ import amigosdevaro.com.epoc.tipos.FarmacoImpl;
  */
 public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMed.ViewHolderDisplayMed>{
     List<Farmaco> datos ;
+    Context context;
 
-    public AdaptadorDisplayMed(List<Farmaco> datos) {
+    public AdaptadorDisplayMed(List<Farmaco> datos, Context context) {
         this.datos = datos;
+        this.context= context;
     }
 
     @Override
@@ -78,6 +82,7 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
                 @Override
                 public boolean onLongClick(View v) {
                     //TODO://TODO pasar a la actividad MedForms pasandole el farmaco como parametro para que pueda editarlo.
+                    ((Activity)context).finish();
                     Log.d("DISPLAYMED", "long click item");
                     return true;
                 }
