@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Layout;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -76,24 +77,21 @@ public class MedForm extends AppCompatActivity {
 
 
     /*Lo que es obligatorio rellenar es: Dias, tipoFarmaco, administracionFarmaco, primeraDosis*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.medoform);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //Flechita
+       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       setSupportActionBar(toolbar);
         //Barra Arriba
-        getSupportActionBar().setTitle("Mis medicamentos");
+        getSupportActionBar().setTitle("Mi medicina");
 
         //Añadiendo flechita atras:
-        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        /*final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);*/
+        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
 
 
         //Cambiar el background de los botones a uno mas cool:
@@ -115,7 +113,6 @@ public class MedForm extends AppCompatActivity {
         //vista si se va a editar o no.
 
 
-
         //Si se clica el fondo blanco se oculta el teclado
         View layout = findViewById(R.id.linear_layout_medform);
 
@@ -128,12 +125,6 @@ public class MedForm extends AppCompatActivity {
             }
         });
 
-
-//1705016..........
-
-                //Cambiando titulo toolbar:
-                //TODO: pensar que poner
-                getSupportActionBar().setTitle("Mi Medicina");
 
 //1705016..........
         //Compruebo si estamos editando o creando un nuevo medicamento:
@@ -170,8 +161,7 @@ public class MedForm extends AppCompatActivity {
                     message.setText("Elige al menos un Dia de la Semana.");
                     message.show();
                 }
-
-                 else{
+                else{
                     //Cojo los datos del nombre del medicamento del campo de texto:
                     EditText nombreMed = (EditText) findViewById(R.id.nombre_farmaco);
                     nombreMedicamento = nombreMed.getText().toString().trim();
@@ -181,16 +171,14 @@ public class MedForm extends AppCompatActivity {
                         //Por defecto le doy el nombre del tipo de farmaco.
                         nombreMedicamento = tipoFarmaco.toString();
                     }
-
-
-
-
                         //TODO: Preguntar a varo si el ya hace algo cuando la dosis es cada -1 IMPORTANTE.
                         posologia = new PosologiaImpl(Semana, dosisCada, primeraDosis, administracionFarmaco);
-                        farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
-                    if(!editando) {
-                        //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
 
+
+
+                    if (!editando) {
+
+                        //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
                         int repetido = 1;
                         for (Farmaco x : EpocDB.getFarmacos()) {
 
@@ -204,46 +192,30 @@ public class MedForm extends AppCompatActivity {
                             }
                         }
                         //Save new data
+                        farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
                         EpocDB.addFarmaco(farmaco);
-                    }else{
+                    } else {
+                        if(!editar.getNombre().equals(nombreMedicamento)){
 
-                        //Compruebo que en la base de datos no existe un medicamento con el mismo nombre
-                        // en caso de que n:
 
-                        if(nombreMedicamento.equals(editar.getNombre())){
-                        int repetido = 1;
-                        for (Farmaco x : EpocDB.getFarmacos()) {
-
-                            //Si existe le cambio el nombre:
-                            if (x.getNombre().equals(nombreMedicamento)) {
-                                repetido++;
-                                if (repetido > 2) {
-                                    nombreMedicamento = nombreMedicamento.substring(0, nombreMedicamento.length() - 3);
-                                }
-                                nombreMedicamento += "(" + repetido + ")";
-                            }
-                        }}else{
-                            int repetido = 1;
+                            //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
+                            int aux = 1;
                             for (Farmaco x : EpocDB.getFarmacos()) {
 
                                 //Si existe le cambio el nombre:
                                 if (x.getNombre().equals(nombreMedicamento)) {
-                                    repetido++;
-                                    if (repetido > 2) {
+                                    aux++;
+                                    if (aux > 2) {
                                         nombreMedicamento = nombreMedicamento.substring(0, nombreMedicamento.length() - 3);
                                     }
-                                    nombreMedicamento += "(" + repetido + ")";
+                                    nombreMedicamento += "(" + aux + ")";
                                 }
                             }
+
                         }
-                        //TODO: comprobar que en la base de datos va bien.
-                        EpocDB.updateFarmaco(editar,farmaco);
+                        farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
+                        EpocDB.updateFarmaco(editar, farmaco);
                     }
-
-
-
-
-
                     //Goes back to main activity
                     finish();
                     startActivity(new Intent(MedForm.this, DisplayMeds.class));
