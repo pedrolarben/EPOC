@@ -183,8 +183,13 @@ public class MedForm extends AppCompatActivity {
                     }
 
 
-                    //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
 
+
+                        //TODO: Preguntar a varo si el ya hace algo cuando la dosis es cada -1 IMPORTANTE.
+                        posologia = new PosologiaImpl(Semana, dosisCada, primeraDosis, administracionFarmaco);
+                        farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
+                    if(!editando) {
+                        //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
 
                         int repetido = 1;
                         for (Farmaco x : EpocDB.getFarmacos()) {
@@ -198,15 +203,39 @@ public class MedForm extends AppCompatActivity {
                                 nombreMedicamento += "(" + repetido + ")";
                             }
                         }
-
-                        //TODO: Preguntar a varo si el ya hace algo cuando la dosis es cada -1 IMPORTANTE.
-                        posologia = new PosologiaImpl(Semana, dosisCada, primeraDosis, administracionFarmaco);
-                        farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
-                    if(!editando) {
                         //Save new data
                         EpocDB.addFarmaco(farmaco);
                     }else{
 
+                        //Compruebo que en la base de datos no existe un medicamento con el mismo nombre
+                        // en caso de que n:
+
+                        if(nombreMedicamento.equals(editar.getNombre())){
+                        int repetido = 1;
+                        for (Farmaco x : EpocDB.getFarmacos()) {
+
+                            //Si existe le cambio el nombre:
+                            if (x.getNombre().equals(nombreMedicamento)) {
+                                repetido++;
+                                if (repetido > 2) {
+                                    nombreMedicamento = nombreMedicamento.substring(0, nombreMedicamento.length() - 3);
+                                }
+                                nombreMedicamento += "(" + repetido + ")";
+                            }
+                        }}else{
+                            int repetido = 1;
+                            for (Farmaco x : EpocDB.getFarmacos()) {
+
+                                //Si existe le cambio el nombre:
+                                if (x.getNombre().equals(nombreMedicamento)) {
+                                    repetido++;
+                                    if (repetido > 2) {
+                                        nombreMedicamento = nombreMedicamento.substring(0, nombreMedicamento.length() - 3);
+                                    }
+                                    nombreMedicamento += "(" + repetido + ")";
+                                }
+                            }
+                        }
                         //TODO: comprobar que en la base de datos va bien.
                         EpocDB.updateFarmaco(editar,farmaco);
                     }
