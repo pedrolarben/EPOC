@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by Alberto on 18/04/2016.
  */
 public class FarmacoImpl implements Farmaco, Serializable {
+
     private String nombre;
 
     private TipoFarmaco tipo;
