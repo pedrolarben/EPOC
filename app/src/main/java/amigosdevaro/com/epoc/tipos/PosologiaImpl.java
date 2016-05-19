@@ -1,9 +1,10 @@
 package amigosdevaro.com.epoc.tipos;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-public class PosologiaImpl implements Posologia {
+public class PosologiaImpl implements Posologia,Serializable {
 	
 	
 	private Set<DiasSemana> diassemanas;

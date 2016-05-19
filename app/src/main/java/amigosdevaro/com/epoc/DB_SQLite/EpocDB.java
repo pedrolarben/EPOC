@@ -155,7 +155,6 @@ public  class EpocDB {
         int idpos = 0;
         int idf = 0;
         if(readableDB!=null){
-            readableDB.execSQL("");
             Cursor c = readableDB.rawQuery(" SELECT oid_pos, oid_f FROM farmacos WHERE nombre='"+fantigo.getNombre()+"' ", null);
             if(c.moveToFirst()){
                 idpos = c.getInt(0);
@@ -188,7 +187,8 @@ public  class EpocDB {
             writableDB.execSQL("UPDATE posologias SET administracionFarmaco='"+fnuevo.getPosologia().getAdministracion().toString()+"', cada="+fnuevo.getPosologia().getCadaCuantosDias()+", primera="+fnuevo.getPosologia().getPrimeraDosisHora().getTimeInMillis()+", L="+l+", M="+m+", X="+x+", J="+j+", V="+v+", S="+s+", D="+d+" WHERE oid_pos="+idpos+" ");
             res = true;
         }
-
+        readableDB.close();
+        writableDB.close();
         return res;
     }
     public static boolean addFarmaco(Farmaco f){
@@ -249,6 +249,7 @@ public  class EpocDB {
             writableDB.execSQL("DELETE FROM farmacos WHERE nombre='"+f.getNombre()+"'");
             res = true;
         }
+        writableDB.close();
         return res;
     }
 
@@ -592,6 +593,8 @@ public  class EpocDB {
             writableDB.execSQL("INSERT INTO farmacosTomados (oid_f, hora) VALUES ("+oidp+", "+time.getTimeInMillis()+")");
             res = true;
         }
+        readableDB.close();
+        writableDB.close();
         return res;
     }
 
@@ -600,6 +603,7 @@ public  class EpocDB {
         if(writableDB!=null){
             writableDB.execSQL("DROP TABLE IF EXISTS farmacosTomados");
         }
+        writableDB.close();
     }
 
     /******************************
@@ -696,6 +700,7 @@ public  class EpocDB {
             }
         }
         SatOxigeno st = new SatOxigenoImpl(v,gc);
+        readableDB.close();
         return st;
     }
 
@@ -720,6 +725,7 @@ public  class EpocDB {
                 }while(c1.moveToNext());
             }
         }
+        readableDB.close();
         return res;
     }
     public static boolean addSatOxigeno(Descompensacion descompensacion  ,  SatOxigeno satOxigeno){

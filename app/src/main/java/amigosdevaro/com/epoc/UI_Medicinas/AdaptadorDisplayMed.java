@@ -1,5 +1,7 @@
 package amigosdevaro.com.epoc.UI_Medicinas;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
@@ -23,9 +26,11 @@ import amigosdevaro.com.epoc.tipos.FarmacoImpl;
  */
 public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMed.ViewHolderDisplayMed>{
     List<Farmaco> datos ;
+    Context context;
 
-    public AdaptadorDisplayMed(List<Farmaco> datos) {
+    public AdaptadorDisplayMed(List<Farmaco> datos,Context context) {
         this.datos = datos;
+        this.context = context;
     }
 
     @Override
@@ -108,8 +113,15 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
             buttonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO pasar a la actividad MedForms pasandole el farmaco como parametro para que pueda editarlo.
+
                     Log.d("DISPLAYMED", "edit");
+                    //1705016..........
+                    Farmaco editar = datos.get(getAdapterPosition());
+                    Intent intent = new Intent(v.getContext(), MedForm.class);
+                    intent.putExtra("farmacoAEditar",(Serializable)editar);
+                    ((Activity)context).finish();
+                    v.getContext().startActivity(intent);
+                    //1705016..........
                 }
             });
 

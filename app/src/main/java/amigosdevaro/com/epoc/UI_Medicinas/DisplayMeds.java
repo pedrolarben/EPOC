@@ -51,7 +51,7 @@ public class DisplayMeds extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.displayMed_lista);
         recyclerView.setHasFixedSize(true);
 
-        final AdaptadorDisplayMed adaptador = new AdaptadorDisplayMed(datos);
+        final AdaptadorDisplayMed adaptador = new AdaptadorDisplayMed(datos,this);
 
         recyclerView.setAdapter(adaptador);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

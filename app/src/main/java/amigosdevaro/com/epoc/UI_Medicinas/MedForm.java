@@ -3,6 +3,7 @@ package amigosdevaro.com.epoc.UI_Medicinas;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,8 +13,12 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,28 +44,34 @@ import amigosdevaro.com.epoc.tipos.AdministracionFarmaco;
  */
 public class MedForm extends AppCompatActivity {
 
+
+
+    //1705016..........
+    public static boolean editando;
+    Farmaco editar;
+    //1705016..........
+
+
+
+
     //Fields de la clase:
     private Calendar calendar;
-
-
-
 
     //Datos recogidos del formulario
 
     //Para crear un Farmaco se necesita esta info:
     private String nombreMedicamento;
-    private TipoFarmaco tipoFarmaco = null;
-    private AdministracionFarmaco administracionFarmaco = null;
+    private TipoFarmaco tipoFarmaco;
+    private AdministracionFarmaco administracionFarmaco;
 
     //Posologia:
-    private Set<DiasSemana> Semana = new HashSet<DiasSemana>();
+    private Set<DiasSemana> Semana = new HashSet<DiasSemana>(); //empty
     int dosisCada = -1;
     private GregorianCalendar primeraDosis = new GregorianCalendar();
 
     //Objetos que crear con estos campos luego:
     Posologia posologia;
     Farmaco farmaco;
-
     int accentColor;
 
 
@@ -99,11 +110,45 @@ public class MedForm extends AppCompatActivity {
         btn3.setBackgroundResource(android.R.drawable.btn_default);
         btn4.setBackgroundResource(android.R.drawable.btn_default);
 
+//1705016..........
+        editando = false; //Restablecemos el valor para que se comprueba cada vez que se cree la
+        //vista si se va a editar o no.
 
 
-        //Cambiando titulo toolbar:
-        //TODO: pensar que poner
-        getSupportActionBar().setTitle("Mi Medicina");
+
+        //Si se clica el fondo blanco se oculta el teclado
+        View layout = findViewById(R.id.linear_layout_medform);
+
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(v);
+                return true;
+
+            }
+        });
+
+
+//1705016..........
+
+                //Cambiando titulo toolbar:
+                //TODO: pensar que poner
+                getSupportActionBar().setTitle("Mi Medicina");
+
+//1705016..........
+        //Compruebo si estamos editando o creando un nuevo medicamento:
+
+        try{
+            editar = (Farmaco) getIntent().getExtras().get("farmacoAEditar");
+            if(editar!=null){
+            cargarFarmaco(editar);
+            actualizarVista();}
+        }catch(NullPointerException e){
+            Log.d("MEDOFORM","NULL POINTER");
+        };
+//1705016..........
+
+
 
         //Form buttons:
 
@@ -140,31 +185,35 @@ public class MedForm extends AppCompatActivity {
 
                     //Compruebo que en la base de datos no existe un medicamento con el mismo nombre:
 
-                    int repetido = 1;
-                    for(Farmaco x: EpocDB.getFarmacos()){
 
-                        //Si existe le cambio el nombre:
-                        if(x.getNombre().equals(nombreMedicamento)){
-                            repetido++;
-                            if(repetido>2){
-                                nombreMedicamento = nombreMedicamento.substring(0,nombreMedicamento.length()-3);
+                        int repetido = 1;
+                        for (Farmaco x : EpocDB.getFarmacos()) {
+
+                            //Si existe le cambio el nombre:
+                            if (x.getNombre().equals(nombreMedicamento)) {
+                                repetido++;
+                                if (repetido > 2) {
+                                    nombreMedicamento = nombreMedicamento.substring(0, nombreMedicamento.length() - 3);
+                                }
+                                nombreMedicamento += "(" + repetido + ")";
                             }
-                            nombreMedicamento += "("+repetido+")";
                         }
+
+                        //TODO: Preguntar a varo si el ya hace algo cuando la dosis es cada -1 IMPORTANTE.
+                        posologia = new PosologiaImpl(Semana, dosisCada, primeraDosis, administracionFarmaco);
+                        farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
+                    if(!editando) {
+                        //Save new data
+                        EpocDB.addFarmaco(farmaco);
+                    }else{
+
+                        //TODO: comprobar que en la base de datos va bien.
+                        EpocDB.updateFarmaco(editar,farmaco);
                     }
 
-                    //TODO: Preguntar a varo si el ya hace algo cuando la dosis es cada -1 IMPORTANTE.
 
 
 
-                    posologia = new PosologiaImpl(Semana,dosisCada,primeraDosis,administracionFarmaco);
-                    farmaco = new FarmacoImpl(nombreMedicamento,tipoFarmaco,posologia);
-
-
-                    //Save new data
-                    EpocDB.addFarmaco(farmaco);
-
-                    //EpocDB.addFarmacoTomado(farmaco,new GregorianCalendar() );//BORRAR
 
                     //Goes back to main activity
                     finish();
@@ -202,6 +251,8 @@ public class MedForm extends AppCompatActivity {
         tipoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipo.setAdapter(new NothingSelectedSpinnerAdapter(tipoAdapter, R.layout.nadaseleccionado_tipofarmaco, this));
 
+
+
         //Listener:
         tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -211,6 +262,7 @@ public class MedForm extends AppCompatActivity {
                 * IMPORTA, NO CAMBIARLO*/
 
                 tipoFarmaco = TipoFarmaco.values()[position];
+                hideKeyboard(view);
             }
 
             @Override
@@ -239,6 +291,8 @@ public class MedForm extends AppCompatActivity {
                 * IMPORTA, NO CAMBIARLO*/
 
                 administracionFarmaco = AdministracionFarmaco.values()[position];
+                hideKeyboard(view);
+
             }
 
             @Override
@@ -262,6 +316,7 @@ public class MedForm extends AppCompatActivity {
                 //Posicion porque vamos del 1 al 12
 
                 dosisCada = position;
+                hideKeyboard(view);
 
             }
 
@@ -391,6 +446,79 @@ public class MedForm extends AppCompatActivity {
         builder.create();
         builder.show();
     }
+
+    //1705016..........
+
+//Si tenemos un farmaco que editar lo carga:
+    public void cargarFarmaco(Farmaco editar){
+
+        //Recogemos los parametros
+        nombreMedicamento = editar.getNombre();
+        tipoFarmaco=editar.getTipo();
+        administracionFarmaco=editar.getPosologia().getAdministracion();
+        Semana = editar.getPosologia().getDiassemanas();
+        primeraDosis=editar.getPosologia().getPrimeraDosisHora();
+        dosisCada = editar.getPosologia().getCadaCuantosDias();
+        MedForm.editando = true;
+    }
+
+    public void actualizarVista(){
+
+        EditText nombre = (EditText) findViewById(R.id.nombre_farmaco);
+       final Spinner tFarmaco = (Spinner) findViewById(R.id.spinner_tipo);
+       final Spinner adminFarmaco = (Spinner) findViewById(R.id.spinner_administracion);
+       final Spinner dosCada = (Spinner) findViewById(R.id.spinner_dosiscada);
+
+
+        nombre.setText(nombreMedicamento);
+
+        tFarmaco.post(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < TipoFarmaco.values().length; i++) {
+                    if (TipoFarmaco.values()[i].equals(tipoFarmaco)) {
+                        tFarmaco.setSelection(i);
+                    }
+                }
+
+
+                for (int i = 0; i < AdministracionFarmaco.values().length; i++) {
+                    if (TipoFarmaco.values()[i].equals(tipoFarmaco)) {
+                        adminFarmaco.setSelection(i);
+                    }
+                }
+
+
+                dosCada.setSelection(dosisCada);
+            }
+        });
+
+
+
+
+
+
+        //Los botones de dias de semana y primera dosis en principio ya tienen valor asi que aparecen
+        //con color. TODO: de momento si entran de nuevo no mostraran los parámetros que tenian antes
+        // TODO: es algo enrevesado hacerlo.
+
+        Button pdosis = (Button) findViewById(R.id.btn_selecthour);
+        Button semana = (Button) findViewById(R.id.btn_selectWeek);
+        pdosis.setBackgroundColor(accentColor);
+        semana.setBackgroundColor(accentColor);
+
+    }
+
+
+
+    public void hideKeyboard(View v){
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(),0);
+    }
+
+
+
+    //1705016..........
 
 }
 
