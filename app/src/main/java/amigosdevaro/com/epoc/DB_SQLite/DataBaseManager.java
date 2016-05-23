@@ -45,7 +45,7 @@ public class DataBaseManager {
     public static final String CN_V_POS = "V";
     public static final String CN_S_POS = "S";
     public static final String CN_D_POS = "D";
-    
+
 
     public static final String CREATE_TABLE_POSOLOGIAS = "create table " +TABLE_NAME_POS+ " ("
             +CN_OID_POS+ " integer primary key autoincrement,"
@@ -112,17 +112,40 @@ public class DataBaseManager {
             +CN_SOMNOLENCIA_D+ " numeric," +
             "FOREIGN KEY("+CN_OID_PD+") REFERENCES "+TABLE_NAME_P+"("+CN_OID_P+"), "+
             "FOREIGN KEY("+CN_OID_SOD+") REFERENCES "+TABLE_NAME_SO+"("+CN_OID_SO+"));";
-            
-    
+
+
     public static final String TABLE_NAME_FT = "farmacosTomados";
     public static final String CN_OID_FT = "oid_ft";
     public static final String CN_OID_FFT = "oid_f";
     public static final String CN_HORA_FT = "hora";
-    
+
     public static final String CREATE_TABLE_FARMACOSTOMADOS = "create table " +TABLE_NAME_FT+ " ("
             +CN_OID_FT+ " integer primary key autoincrement,"
             +CN_OID_FFT+ " integer,"
             +CN_HORA_FT+ " numeric," +
             "FOREIGN KEY("+CN_OID_FFT+") REFERENCES "+TABLE_NAME_F+"("+CN_OID_F+"));";
+
+
+    public static final String TABLE_NAME_C = "caminatas";
+    public static final String CN_OID_C = "oid_c";
+    public static final String CN_OID_CP = "oid_p";
+    public static final String CN_FECHA_C = "fecha";
+    public static final String CN_HORA_C = "hora";
+    public static final String CN_DURACION_C = "duracion";
+    public static final String CN_DISNEA_C = "disnea";
+    public static final String CN_EJERCICIOS_C = "ejercicio";
+    public static final String CN_OBSERVACIONES_C = "observaciones";
+
+    public static final String CREATE_TABLE_CAMINATAS = "create table " +TABLE_NAME_C+ " ("
+            +CN_OID_C+ " integer primary key autoincrement,"
+            +CN_OID_CP+ " integer,"
+            +CN_FECHA_C+ " text,"
+            +CN_HORA_C+ " text,"
+            +CN_DURACION_C+ " integer, "
+            +CN_DISNEA_C+ " real, "
+            +CN_EJERCICIOS_C+ " text, "
+            +CN_OBSERVACIONES_C+ " text, " +
+            "FOREIGN KEY("+CN_OID_CP+") REFERENCES "+TABLE_NAME_P+"("+CN_OID_P+"));";
+
 
 }
