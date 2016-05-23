@@ -361,6 +361,7 @@ public class EpocDB {
         return res;
 
     }
+
     public static List<Farmaco> getFarmacosToDisplayAllPedro(){
         List<Farmaco> today = getFarmacosToday();
         List<Farmaco> res = new ArrayList<Farmaco>();
@@ -420,7 +421,6 @@ public class EpocDB {
 
     }
 
-
     public static Farmaco getNext(Farmaco prev){
         GregorianCalendar gc = new GregorianCalendar();
         gc.set(GregorianCalendar.HOUR_OF_DAY, prev.getPosologia().getPrimeraDosisHora().get(GregorianCalendar.HOUR_OF_DAY) + prev.getPosologia().getCadaCuantosDias());
@@ -474,6 +474,20 @@ public class EpocDB {
         return aux;
     }
 
+    public static boolean eliminaFarmacoTomado(Farmaco f, GregorianCalendar time) {
+        boolean res = false;
+        SQLiteDatabase readableDB = helper.getReadableDatabase();
+        if (readableDB != null) {
+            readableDB.execSQL("SELECT FROM farmacos WHERE nombre='" + f.getNombre());
+            res = true;
+        }
+        SQLiteDatabase writableDB = helper.getWritableDatabase();
+        if (writableDB != null) {
+            writableDB.execSQL("DELETE FROM farmacosTomados WHERE oid_f='" + f.getNombre() + "' and hora="+time.getTimeInMillis());
+            res = true;
+        }
+        return res;
+    }
     public static List<Farmaco> getFarmacosTomados() {
         List<Farmaco> res = new ArrayList<Farmaco>();
         Boolean l = false, m = false, x = false, j = false, v = false, s = false, d = false;
