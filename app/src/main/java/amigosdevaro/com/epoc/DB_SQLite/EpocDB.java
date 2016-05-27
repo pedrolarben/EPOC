@@ -23,6 +23,8 @@ import amigosdevaro.com.epoc.tipos.DescompesacionImpl;
 import amigosdevaro.com.epoc.tipos.DiasSemana;
 import amigosdevaro.com.epoc.tipos.Farmaco;
 import amigosdevaro.com.epoc.tipos.FarmacoImpl;
+import amigosdevaro.com.epoc.tipos.FarmacoTomado;
+import amigosdevaro.com.epoc.tipos.FarmacoTomadoImpl;
 import amigosdevaro.com.epoc.tipos.Paciente;
 import amigosdevaro.com.epoc.tipos.Posologia;
 import amigosdevaro.com.epoc.tipos.PosologiaImpl;
@@ -396,24 +398,25 @@ public class EpocDB {
             }
         }
 
-        Collections.sort(res, new Comparator<Farmaco>(){
-            public int compare(Farmaco p2, Farmaco p1){
+        Collections.sort(res, new Comparator<Farmaco>() {
+            public int compare(Farmaco p2, Farmaco p1) {
                 int comparaHora = new Integer(p2.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY)).compareTo(new Integer(p1.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY)));
-                 if(comparaHora==0){
-                comparaHora = new Integer(p2.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE)).compareTo(new Integer(p1.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE)));
-
-                 }
-                return comparaHora;
-            }
-        });
-        Collections.sort(res1, new Comparator<Farmaco>(){
-            public int compare(Farmaco p2, Farmaco p1){
-                int comparaHora = new Integer(p2.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY)).compareTo(new Integer(p1.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY)));
-                if(comparaHora==0){
+                if (comparaHora == 0) {
                     comparaHora = new Integer(p2.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE)).compareTo(new Integer(p1.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE)));
 
                 }
-                return comparaHora;            }
+                return comparaHora;
+            }
+        });
+        Collections.sort(res1, new Comparator<Farmaco>() {
+            public int compare(Farmaco p2, Farmaco p1) {
+                int comparaHora = new Integer(p2.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY)).compareTo(new Integer(p1.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY)));
+                if (comparaHora == 0) {
+                    comparaHora = new Integer(p2.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE)).compareTo(new Integer(p1.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE)));
+
+                }
+                return comparaHora;
+            }
         });
         res.addAll(res1);
         return res;
@@ -474,39 +477,29 @@ public class EpocDB {
         return aux;
     }
 
-    public static boolean eliminaFarmacoTomado(Farmaco f, GregorianCalendar time) {
-        boolean res = false;
-        SQLiteDatabase readableDB = helper.getReadableDatabase();
-        if (readableDB != null) {
-            readableDB.execSQL("SELECT FROM farmacos WHERE nombre='" + f.getNombre());
-            res = true;
-        }
-        SQLiteDatabase writableDB = helper.getWritableDatabase();
-        if (writableDB != null) {
-            writableDB.execSQL("DELETE FROM farmacosTomados WHERE oid_f='" + f.getNombre() + "' and hora="+time.getTimeInMillis());
-            res = true;
-        }
-        return res;
-    }
-    public static List<Farmaco> getFarmacosTomados() {
-        List<Farmaco> res = new ArrayList<Farmaco>();
-        Boolean l = false, m = false, x = false, j = false, v = false, s = false, d = false;
+
+    public static List<FarmacoTomado> getFarmacosTomados(){
+        List<FarmacoTomado> res = new ArrayList<FarmacoTomado>();
+        Boolean l= false,m=false,x=false,j=false,v=false,s=false,d = false;
         Integer cada = 6;
         AdministracionFarmaco ad = null;
         GregorianCalendar gc = null;
+        Integer h = null, mi= null;
         String nombre = null;
         TipoFarmaco tf = null;
-        int oidpos = 0;
-        int oidf = 0;
+        int oidpos=0;
+        int oidf=0;
         //abrimos bd:
         SQLiteDatabase readableDB = helper.getReadableDatabase();
         //si hemos abierto correctamente la db
-        if (readableDB != null) {
+        if(readableDB!=null) {
 
-            Cursor c = readableDB.rawQuery("SELECT oid_f FROM farmacosTomados", null);
+            Cursor c = readableDB.rawQuery("SELECT oid_f, hora, minutos FROM farmacosTomados", null);
             if (c.moveToFirst()) {
                 do {
                     oidf = c.getInt(0);
+                    h = c.getInt(1);
+                    mi = c.getInt(2);
                     Cursor c2 = readableDB.rawQuery("SELECT nombre, tipo, oid_pos FROM farmacos WHERE oid_f=" + oidf + "", null);
                     if (c2.moveToFirst()) {
                         nombre = c2.getString(0);
@@ -551,7 +544,8 @@ public class EpocDB {
                         }
                         Posologia p = new PosologiaImpl(sds, cada, gc, ad);
                         Farmaco f = new FarmacoImpl(nombre, tf, p);
-                        res.add(f);
+                        FarmacoTomado ft = new FarmacoTomadoImpl(f,h,mi);
+                        res.add(ft);
                     }
                 } while (c.moveToNext());
             }
@@ -561,33 +555,72 @@ public class EpocDB {
         //devolvemos (en caso de que haya que devolver algo)
         return res;
     }
-
-    public static boolean addFarmacoTomado(Farmaco farmaco, GregorianCalendar time) {
+    public static boolean addFarmacoTomado(Farmaco farmaco, Integer h, Integer m){
         Calendar fecha = new GregorianCalendar();
         boolean res = false;
-        int oidp = 0;
+        int oidp=0;
         SQLiteDatabase readableDB = helper.getReadableDatabase();
         SQLiteDatabase writableDB = helper.getWritableDatabase();
         //si hemos abierto correctamente la db
-        if (readableDB != null) {
+        if(readableDB!=null) {
             Cursor c = readableDB.rawQuery("SELECT oid_f FROM farmacos WHERE nombre='" + farmaco.getNombre() + "'", null);
             if (c.moveToFirst()) {
                 oidp = c.getInt(0);
             }
         }
-        if (writableDB != null) {
-            writableDB.execSQL("INSERT INTO farmacosTomados (oid_f, hora) VALUES (" + oidp + ", " + time.getTimeInMillis() + ")");
+        if(writableDB!=null){
+            writableDB.execSQL("INSERT INTO farmacosTomados (oid_f, hora, minutos) VALUES ("+oidp+", "+h+", "+m+")");
             res = true;
         }
+        readableDB.close();
+        writableDB.close();
+        return res;
+    }
+    public static boolean eliminarFarmacoTomado(Farmaco farmaco, Integer h, Integer m){
+        boolean res = false;
+        int oidp=0;
+        SQLiteDatabase readableDB = helper.getReadableDatabase();
+        SQLiteDatabase writableDB = helper.getWritableDatabase();
+        //si hemos abierto correctamente la db
+        if(readableDB!=null) {
+            Cursor c = readableDB.rawQuery("SELECT oid_f FROM farmacos WHERE nombre='" + farmaco.getNombre() + "'", null);
+            if (c.moveToFirst()) {
+                oidp = c.getInt(0);
+            }
+        }
+        if (writableDB!=null) {
+            writableDB.execSQL("DELETE FROM farmacosTomados WHERE oid_f=" +oidp+ " and hora="+h+" and minutos="+m);
+            res = true;
+        }
+        readableDB.close();
+        writableDB.close();
+        return res;
+
+    }
+
+    public static void restartFarmacosTomado(){
+        SQLiteDatabase writableDB = helper.getWritableDatabase();
+        if(writableDB!=null){
+            writableDB.execSQL("DROP TABLE IF EXISTS farmacosTomados");
+        }
+        writableDB.close();
+    }
+
+    public static boolean eliminarCaminata(Caminata c){
+        SQLiteDatabase writableDB = helper.getWritableDatabase();
+
+        Boolean res = false;
+        //si hemos abierto correctamente la db
+        if(writableDB!=null){
+            writableDB.execSQL("DELETE FROM caminatas WHERE fecha='" +c.getFecha()+ "', hora='"+c.getHora()+"");
+            res = true;
+        }
+        writableDB.close();
         return res;
     }
 
-    public static void restartFarmacosTomado() {
-        SQLiteDatabase writableDB = helper.getWritableDatabase();
-        if (writableDB != null) {
-            writableDB.execSQL("DROP TABLE IF EXISTS farmacosTomados");
-        }
-    }
+
+
 
     /******************************
      * POSOLOGIAS

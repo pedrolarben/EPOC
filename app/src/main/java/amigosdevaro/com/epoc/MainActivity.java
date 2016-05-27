@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
     private  Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+     FloatingActionButton editMedicina;
 
     public static boolean fabVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("lifecycle","onCreate");
         super.onCreate(savedInstanceState);
         Log.d("MainOnCreate", tab_index.toString());
         setContentView(R.layout.activity_main);
@@ -44,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
-        final FloatingActionButton editMedicina = (FloatingActionButton) findViewById(R.id.action_edit_medicine);
+        /*final FloatingActionButton*/ editMedicina = (FloatingActionButton) findViewById(R.id.action_edit_medicine);
         editMedicina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.tab_index=1;
                 startActivity(new Intent(MainActivity.this, DisplayMeds.class));
             }
         });
@@ -68,19 +71,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
 
+                if (position == 0) {
+                    Log.d("fab", "hide");
                     editMedicina.hide();
                 } else if (position == 1) {
-
+                    Log.d("fab", "show");
                     editMedicina.show();
                 } else if (position == 2) {
-
+                    Log.d("fab", "hide");
                     editMedicina.hide();
                 }
-                tab_index=position;
+                tab_index = position;
                 Log.d("Adapter", MainActivity.tab_index.toString());
             }
+
 
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -96,10 +101,15 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        TabLayout.Tab tab = tabLayout.getTabAt(tab_index);
+        TabLayout.Tab tab = tabLayout.getTabAt(0);
         tab.select();
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        TabLayout.Tab tab1 = tabLayout.getTabAt(tab_index);
+        tab1.select();
+
+        if(tab_index==1){ editMedicina.show();
+            Log.d("fab", "show");}
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 
        // tabLayout.TabLayoutOnPageChangeListener
@@ -108,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.pill_white));
         tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.walk));
 
-
+        editMedicina.show();
+        Log.d("fab", "show");
 
     }
 
@@ -152,4 +163,57 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    @Override
+    protected void onResume() {
+        Log.d("lifecycle","onResume");
+        Log.d("onResumeMA",MainActivity.tab_index.toString());
+        if(MainActivity.tab_index.equals(1)){
+            //Log.d("onResumeMA","show");
+            Log.d("fab" , "show");
+            editMedicina.show();
+        }
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onStart() {
+        Log.d("fab" , "show");
+        this.editMedicina.show();
+        Log.d("lifecycle","onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+
+        Log.d("lifecycle","onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+
+        Log.d("lifecycle","onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        Log.d("lifecycle","onDestroy");
+        super.onDestroy();
+    }
+
+
+    @Override
+    protected void onRestart() {
+
+        Log.d("lifecycle","onRestart");
+        super.onRestart();
+    }
+
+    public static void  whatever(){
+
+    }
 }

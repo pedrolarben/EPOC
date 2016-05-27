@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,20 +24,26 @@ import java.util.List;
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
 import amigosdevaro.com.epoc.R;
 import amigosdevaro.com.epoc.tipos.Farmaco;
+import amigosdevaro.com.epoc.tipos.FarmacoTomado;
+import amigosdevaro.com.epoc.tipos.FarmacoTomadoImpl;
 
 /**
  * Created by betipedro on 05/05/2016.
  */
 public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMedicinaFragment.ViewHolderMedicinasFragment>{
     List<Farmaco> datos ;
+    List<Farmaco> todosLosFarmacos;
+    View itemView;
+    public List<FarmacoTomado>  farmacosTomados;
 
     public AdaptadorMedicinaFragment(List<Farmaco> datos) {
         this.datos = datos;
+        farmacosTomados = EpocDB.getFarmacosTomados();
+        todosLosFarmacos = EpocDB.getFarmacos();
     }
-
     @Override
     public ViewHolderMedicinasFragment onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.medicinafragment_cardview_elem, parent, false);
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.medicinafragment_cardview_elem, parent, false);
 
         ViewHolderMedicinasFragment vh = new ViewHolderMedicinasFragment(itemView);
 
@@ -45,11 +52,85 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderMedicinasFragment holder, int position) {
+    public void onBindViewHolder(final ViewHolderMedicinasFragment holder, final int position) {
 
-        Farmaco farmaco = datos.get(position);
-        holder.bindTitular(farmaco);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean contieneFarmaco = false;
+               // FarmacoTomado farmTom = new FarmacoTomadoImpl(datos.get(position),-1,-1);
+                for (FarmacoTomado ft : farmacosTomados) {
+                    if (ft.getFarmaco().getNombre().equals(datos.get(position).getNombre()) &&
+                            ft.getHora().equals(datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY))) {
+                        contieneFarmaco = true;
+                      //  farmTom.setHora(ft.getHora());
+                        //farmTom.setMinutos(ft.getMinutos());
+                        break;
+                    }
+                }
+                //TODO añadir a frmacos tomados (EpocDB) y actualizar la vista
+                if (!contieneFarmaco) {
 
+                    EpocDB.addFarmacoTomado(datos.get(position), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
+                   // farmTom.setHora(datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY));
+                    //farmTom.setMinutos(datos.get(position ).getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
+                  //  farmacosTomados.add(farmTom);
+                    farmacosTomados = EpocDB.getFarmacosTomados();
+                    Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_marked_circle_outline);
+                    d.setColorFilter(itemView.getResources().getColor(R.color.colorAccent), PorterDuff.Mode.MULTIPLY);
+
+                    holder.buttonTomado.setImageDrawable(d);
+
+
+                } else {
+
+                    Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_blank_circle_outline);
+                    d.setColorFilter(itemView.getResources().getColor(R.color.gray), PorterDuff.Mode.MULTIPLY);
+
+                    holder.buttonTomado.setImageDrawable(d);
+                    EpocDB.eliminarFarmacoTomado(datos.get(position), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
+
+                    farmacosTomados = EpocDB.getFarmacosTomados();
+                    //    farmacosTomados.remove(farmTom);
+
+                }
+
+
+            }
+        });
+
+        holder.txtNombre.setText(datos.get(position).getNombre());
+        holder.txtTipo.setText(datos.get(position).getTipo().toString());
+        String hora = ""+datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY);
+        String minutos = ""+datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE);
+        if(hora.length()<2){
+            hora="0"+hora;
+        }
+        if(minutos.length()<2){
+            minutos="0"+minutos;
+        }
+        holder.txtHora.setText(hora+":"+minutos);
+        //TODO if ( farmaco ya esta tomado) cambiar el boton por un tic ./
+        boolean contieneFarmaco = false;
+
+        for(FarmacoTomado ft:farmacosTomados){
+            if( ft.getFarmaco().getNombre().equals(datos.get(position).getNombre())&&
+                    ft.getHora().equals(datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY))){
+                contieneFarmaco=true;
+            }
+        }
+        if(!contieneFarmaco){
+            Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_blank_circle_outline);
+            d.setColorFilter(itemView.getResources().getColor(R.color.gray), PorterDuff.Mode.MULTIPLY);
+
+            holder.buttonTomado.setImageDrawable(d);
+        }
+        else{
+            Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_marked_circle_outline);
+            d.setColorFilter(itemView.getResources().getColor(R.color.colorAccent), PorterDuff.Mode.MULTIPLY);
+
+            holder.buttonTomado.setImageDrawable(d);
+        }
     }
 
     @Override
@@ -60,17 +141,18 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
     /*************************************
      *  VIEWHOLDER
      *************************************/
-    public  class ViewHolderMedicinasFragment extends RecyclerView.ViewHolder {
+    public static class ViewHolderMedicinasFragment extends RecyclerView.ViewHolder {
 
-
-        private TextView txtNombre ;
+        public  CardView cardView;
+         TextView txtNombre ;
         private TextView txtTipo ;
         private TextView txtHora;
-        private ImageButton buttonTomado;
+        ImageButton buttonTomado;
+        Farmaco farmaco ;
 
         private Farmaco farm;
 
-        private List<Farmaco> farmacosTomados;
+        private List<FarmacoTomado> farmacosTomados;
 
         public ViewHolderMedicinasFragment(final View itemView){
             super(itemView);
@@ -79,19 +161,13 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
             txtTipo = (TextView) itemView.findViewById(R.id.medicinafragment_tipo);
             txtHora = (TextView) itemView.findViewById(R.id.medicinafragment_hora);
             buttonTomado= (ImageButton) itemView.findViewById(R.id.medicinafragment_tomado);
+            cardView = (CardView) itemView.findViewById(R.id.cardview_element_med_frag);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    //TODO: pasar a la actividad MedForms pasandole el farmaco como parametro para que pueda editarlo.
-
-                    return true;
-                }
-            });
 
         }
         public void bindTitular(Farmaco f){
-            final Farmaco farm = f;
+
+
             txtNombre.setText(f.getNombre());
             txtTipo.setText(f.getTipo().toString());
             String hora = ""+f.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY);
@@ -104,8 +180,14 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
             }
             txtHora.setText(hora+":"+minutos);
             //TODO if ( farmaco ya esta tomado) cambiar el boton por un tic ./
-
-            if(!farmacosTomados.contains(f)){
+            boolean contieneFarmaco = false;
+            for(FarmacoTomado ft:farmacosTomados){
+               if( ft.getFarmaco().getNombre().equals(f.getNombre())&&
+                ft.getHora().equals(f.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY))){
+                   contieneFarmaco=true;
+               }
+            }
+            if(!contieneFarmaco){
                 Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_blank_circle_outline);
                 d.setColorFilter(itemView.getResources().getColor(R.color.gray), PorterDuff.Mode.MULTIPLY);
 
@@ -117,35 +199,56 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
 
                 buttonTomado.setImageDrawable(d);
             }
-
-            buttonTomado.setOnClickListener(new View.OnClickListener() {
+            buttonTomado.setClickable(false);
+           /* buttonTomado.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    boolean contieneFarmaco = false;
+                    txtNombre.setText("hola");
+                    for(FarmacoTomado ft:farmacosTomados){
+                        if( ft.getFarmaco().getNombre().equals(farm.getNombre())&&
+                                ft.getHora().equals(farm.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY))){
+                            contieneFarmaco=true;
+                        }
+                    }
                     //TODO añadir a frmacos tomados (EpocDB) y actualizar la vista
-                    if (!farmacosTomados.contains(farm)) {
+                    if (!contieneFarmaco) {
 
-                        EpocDB.addFarmacoTomado(farm, farm.getPosologia().getPrimeraDosisHora());
+                        EpocDB.addFarmacoTomado(farm, farm.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), farm.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
                         //TODO: actualizar el adaptador
-                        actualiza(getAdapterPosition());
+                        Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_marked_circle_outline);
+                        d.setColorFilter(itemView.getResources().getColor(R.color.colorAccent), PorterDuff.Mode.MULTIPLY);
+
+                        buttonTomado.setImageDrawable(d);
+                       // actualiza(getAdapterPosition(),farm);
 
                     } else {
 
+                        Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_blank_circle_outline);
+                        d.setColorFilter(itemView.getResources().getColor(R.color.gray), PorterDuff.Mode.MULTIPLY);
 
-                        //EpocDB.eliminaFarmacoTomado(farm, farm.getPosologia().getPrimeraDosisHora());
-                        //actualiza(getAdapterPosition());
+                        buttonTomado.setImageDrawable(d);
+                        EpocDB.eliminarFarmacoTomado(farm, farm.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), farm.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
+                       // actualiza(getAdapterPosition(),farm);
 
 
 
                     }
 
                 }
-            });
+            });*/
 
         }
 
 
 
     }
-    public  void actualiza(int pos){
-        this.notifyItemChanged(pos);
+    public  void actualiza(int pos, Farmaco f){
+       /*datos.clear();
+        datos.addAll(datas);
+        notifyDataSetChanged();
+    */
+        notifyItemChanged(pos, f);
+       // notifyDataSetChanged();
+
     }
 }

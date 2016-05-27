@@ -32,22 +32,23 @@
         <activity
             android:name=".UI_Documentacion.PdfDocumentacionActivity"
             android:label="@string/title_activity_pdf_documentacion"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".UI_Medicinas.DisplayMeds"
             android:label="DisplayMeds"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity"></activity>
-
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UI_Medicinas.MedForm"
             android:label="Formulario"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".UI_Medicinas.DisplayMeds"></activity>
-
-
+            android:parentActivityName=".UI_Medicinas.DisplayMeds"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UI_Ejercico.ProgramaEjerciciosActivity"
+            android:label="@string/title_activity_programa_ejercicios"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
-
 
 </manifest>

@@ -118,11 +118,13 @@ public class DataBaseManager {
     public static final String CN_OID_FT = "oid_ft";
     public static final String CN_OID_FFT = "oid_f";
     public static final String CN_HORA_FT = "hora";
+    public static final String CN_MINUTO_FT = "minutos";
 
     public static final String CREATE_TABLE_FARMACOSTOMADOS = "create table " +TABLE_NAME_FT+ " ("
             +CN_OID_FT+ " integer primary key autoincrement,"
             +CN_OID_FFT+ " integer,"
-            +CN_HORA_FT+ " numeric," +
+            +CN_HORA_FT+ " integer,"
+            +CN_MINUTO_FT+ " integer,"+
             "FOREIGN KEY("+CN_OID_FFT+") REFERENCES "+TABLE_NAME_F+"("+CN_OID_F+"));";
 
 

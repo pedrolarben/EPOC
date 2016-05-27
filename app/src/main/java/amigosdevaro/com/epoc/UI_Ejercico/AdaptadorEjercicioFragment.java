@@ -110,7 +110,8 @@ public class AdaptadorEjercicioFragment extends RecyclerView.Adapter<AdaptadorEj
                 public void onClick(View v) {
                     switch (position){
                         case 0:
-                            //TODO
+                            Intent intent0 = new Intent(itemView.getContext(), ProgramaEjerciciosActivity.class);
+                            itemView.getContext().startActivity(intent0);
                             break;
                         case 1:
                             //TODO

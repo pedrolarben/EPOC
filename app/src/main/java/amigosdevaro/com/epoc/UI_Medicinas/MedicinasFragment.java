@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,6 +56,14 @@ public class MedicinasFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.medicinafragment_recyclerview);
         recyclerView.setHasFixedSize(true);
+
+        DefaultItemAnimator animator = new DefaultItemAnimator() {
+            @Override
+            public boolean canReuseUpdatedViewHolder(RecyclerView.ViewHolder viewHolder) {
+                return true;
+            }
+        };
+        recyclerView.setItemAnimator(null);
 
         final AdaptadorMedicinaFragment adaptador = new AdaptadorMedicinaFragment(datos);
 
