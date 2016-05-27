@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/cardview_element_med_frag"
+        android:layout_height="125dp"
+        card_view:cardBackgroundColor="@color/white_trans"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="2.5dp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        card_view:cardPreventCornerOverlap="false"
+
+        >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:textAlignment="center"
+           android:layout_gravity="center_horizontal">
+           <TextView
+               android:id="@+id/caminata_fecha_hora"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+              />
+
+           <TextView
+               android:id="@+id/caminata_duracion"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+               />
+       </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:id="@+id/caminata_disnea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+            <TextView
+                android:id="@+id/caminata_brazos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:id="@+id/caminata_observaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

@@ -107,5 +107,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_pdf_documentacion">pdfDocumentacionActivity</string>
     <string name="title_activity_programa_ejercicios">Programa de ejercicios</string>
+    <string name="title_activity_tabla_caminatas">TablaCaminatasActivity</string>
+    <string name="title_activity_form_caminata">Añade una caminata</string>
 
 </resources>

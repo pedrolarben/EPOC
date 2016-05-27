@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -147,7 +148,7 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
          TextView txtNombre ;
         private TextView txtTipo ;
         private TextView txtHora;
-        ImageButton buttonTomado;
+        ImageView buttonTomado;
         Farmaco farmaco ;
 
         private Farmaco farm;
@@ -160,7 +161,7 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
             txtNombre = (TextView) itemView.findViewById(R.id.medicinafragment_nombre);
             txtTipo = (TextView) itemView.findViewById(R.id.medicinafragment_tipo);
             txtHora = (TextView) itemView.findViewById(R.id.medicinafragment_hora);
-            buttonTomado= (ImageButton) itemView.findViewById(R.id.medicinafragment_tomado);
+            buttonTomado= (ImageView) itemView.findViewById(R.id.medicinafragment_tomado);
             cardView = (CardView) itemView.findViewById(R.id.cardview_element_med_frag);
 
 
@@ -200,42 +201,7 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
                 buttonTomado.setImageDrawable(d);
             }
             buttonTomado.setClickable(false);
-           /* buttonTomado.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    boolean contieneFarmaco = false;
-                    txtNombre.setText("hola");
-                    for(FarmacoTomado ft:farmacosTomados){
-                        if( ft.getFarmaco().getNombre().equals(farm.getNombre())&&
-                                ft.getHora().equals(farm.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY))){
-                            contieneFarmaco=true;
-                        }
-                    }
-                    //TODO añadir a frmacos tomados (EpocDB) y actualizar la vista
-                    if (!contieneFarmaco) {
 
-                        EpocDB.addFarmacoTomado(farm, farm.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), farm.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
-                        //TODO: actualizar el adaptador
-                        Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_marked_circle_outline);
-                        d.setColorFilter(itemView.getResources().getColor(R.color.colorAccent), PorterDuff.Mode.MULTIPLY);
-
-                        buttonTomado.setImageDrawable(d);
-                       // actualiza(getAdapterPosition(),farm);
-
-                    } else {
-
-                        Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_blank_circle_outline);
-                        d.setColorFilter(itemView.getResources().getColor(R.color.gray), PorterDuff.Mode.MULTIPLY);
-
-                        buttonTomado.setImageDrawable(d);
-                        EpocDB.eliminarFarmacoTomado(farm, farm.getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), farm.getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
-                       // actualiza(getAdapterPosition(),farm);
-
-
-
-                    }
-
-                }
-            });*/
 
         }
 

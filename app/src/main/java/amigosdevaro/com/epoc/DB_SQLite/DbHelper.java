@@ -30,6 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseManager.CREATE_TABLE_FARMACOSTOMADOS);
         db.execSQL(DataBaseManager.CREATE_TABLE_SATOXIGENO);
         db.execSQL(DataBaseManager.CREATE_TABLE_DESCOMPENSACIONES);
+        db.execSQL(DataBaseManager.CREATE_TABLE_CAMINATAS);
         Paciente user = new PacienteImpl();
 
       ;
@@ -48,6 +49,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS farmacosTomados");
         db.execSQL("DROP TABLE IF EXISTS satoxigeno");
         db.execSQL("DROP TABLE IF EXISTS descompensaciones");
+        db.execSQL("DROP TABLE IF EXISTS caminatas");
+
 
         //Se crea la nueva versión de la tabla
         db.execSQL(DataBaseManager.CREATE_TABLE_PACIENTES);
@@ -56,6 +59,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseManager.CREATE_TABLE_FARMACOSTOMADOS);
         db.execSQL(DataBaseManager.CREATE_TABLE_SATOXIGENO);
         db.execSQL(DataBaseManager.CREATE_TABLE_DESCOMPENSACIONES);
+        db.execSQL(DataBaseManager.CREATE_TABLE_CAMINATAS);
     }
 
 }

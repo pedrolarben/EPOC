@@ -114,7 +114,8 @@ public class AdaptadorEjercicioFragment extends RecyclerView.Adapter<AdaptadorEj
                             itemView.getContext().startActivity(intent0);
                             break;
                         case 1:
-                            //TODO
+                            Intent intent1= new Intent(itemView.getContext(),TablaCaminatasActivity.class);
+                            itemView.getContext().startActivity(intent1);
                             break;
                         case 2:
                             Intent intent2 = new Intent(itemView.getContext(), PdfDocumentacionActivity.class);

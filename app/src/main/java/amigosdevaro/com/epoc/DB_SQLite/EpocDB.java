@@ -165,7 +165,6 @@ public class EpocDB {
         int idpos = 0;
         int idf = 0;
         if (readableDB != null) {
-            readableDB.execSQL("");
             Cursor c = readableDB.rawQuery(" SELECT oid_pos, oid_f FROM farmacos WHERE nombre='" + fantigo.getNombre() + "' ", null);
             if (c.moveToFirst()) {
                 idpos = c.getInt(0);

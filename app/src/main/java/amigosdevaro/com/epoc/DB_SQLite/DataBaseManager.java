@@ -135,7 +135,7 @@ public class DataBaseManager {
     public static final String CN_HORA_C = "hora";
     public static final String CN_DURACION_C = "duracion";
     public static final String CN_DISNEA_C = "disnea";
-    public static final String CN_EJERCICIOS_C = "ejercicio";
+    public static final String CN_EJERCICIOS_C = "ejercicios";
     public static final String CN_OBSERVACIONES_C = "observaciones";
 
     public static final String CREATE_TABLE_CAMINATAS = "create table " +TABLE_NAME_C+ " ("

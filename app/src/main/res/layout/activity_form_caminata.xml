@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="amigosdevaro.com.epoc.UI_Ejercico.FormCaminataActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="20dp">
+
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona el día" />
+
+        <Button
+            android:id="@+id/caminata_dia_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectDiaCaminata"
+            android:text="dd/mm/yy" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleciona la hora"
+            android:layout_marginTop="6dp"/>
+
+
+        <Button
+            android:id="@+id/caminata_hora_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectHoraCaminata"
+            android:text="hh:mm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duración de la caminata"
+            android:layout_marginTop="6dp"/>
+        <Button
+            android:id="@+id/caminata_duracion_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectDuracionCaminata"
+            android:text="horas y minutos" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grado de disnea durante la caminata"
+            android:layout_marginTop="6dp"/>
+        <Button
+            android:id="@+id/caminata_disnea_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectDisneaCaminata"
+            android:text="Nivel de disnea" />
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSaveCaminata"
+            android:text="Añadir caminata"
+            android:layout_margin="40dp" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

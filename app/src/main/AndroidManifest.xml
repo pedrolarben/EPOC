@@ -48,7 +48,30 @@
             android:name=".UI_Ejercico.ProgramaEjerciciosActivity"
             android:label="@string/title_activity_programa_ejercicios"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".UI_Ejercico.TablaCaminatasActivity"
+            android:label="@string/title_activity_tabla_caminatas"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="amigosdevaro.com.epoc.MainActivity" />
+        </activity>
+        <activity
+            android:name=".UI_Ejercico.FormCaminataActivity"
+            android:label="@string/title_activity_form_caminata"
+            android:parentActivityName=".UI_Ejercico.TablaCaminatasActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="amigosdevaro.com.epoc.UI_Ejercico.TablaCaminatasActivity" />
+        </activity>
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
