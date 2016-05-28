@@ -611,7 +611,7 @@ public class EpocDB {
         Boolean res = false;
         //si hemos abierto correctamente la db
         if(writableDB!=null){
-            writableDB.execSQL("DELETE FROM caminatas WHERE fecha='" +c.getFecha()+ "', hora='"+c.getHora()+"");
+            writableDB.execSQL("DELETE FROM caminatas WHERE fecha='" +c.getFecha()+ "'and hora='"+c.getHora()+"'");
             res = true;
         }
         writableDB.close();
@@ -841,7 +841,7 @@ public class EpocDB {
         SQLiteDatabase readableDB = helper.getReadableDatabase();
         //si hemos abierto correctamente la db
         if(readableDB!=null){
-            Cursor c = readableDB.rawQuery("SELECT fecha, hora, duracion, disnea, ejercicios, observaciones FROM caminatas WHERE oid_p="+idPaciente+"", null);
+            Cursor c = readableDB.rawQuery("SELECT fecha, hora, duracion, disnea, ejercicios, observaciones FROM caminatas ", null);
             if(c.moveToFirst()){
                 do { Caminata ca = new CaminataImpl();
                     ca.setFecha(c.getString(0));
@@ -865,7 +865,7 @@ public class EpocDB {
         //si hemos abierto correctamente la db
         if(writableDB!=null){
 
-            writableDB.execSQL("INSERT INTO caminatas (fecha, hora, duracion, disnea, ejercicios, observaciones) VALUES ('"+c.getFecha()+"', '"+c.getHora()+"', "+c.getDuracion()+ ", "+c.getDisnea()+ ", "+c.getEjercicios()+ ", '"+c.getObservaciones()+"') ");
+            writableDB.execSQL("INSERT INTO caminatas (fecha, hora, duracion, disnea, ejercicios, observaciones) VALUES ('"+c.getFecha()+"', '"+c.getHora()+"', "+c.getDuracion()+ ", "+c.getDisnea()+ ", '"+c.getEjercicios()+ "', '"+c.getObservaciones()+"') ");
             res = true;
         }
 

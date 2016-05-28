@@ -1,10 +1,13 @@
 package amigosdevaro.com.epoc;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
+        setOverflowButtonColor(toolbar,R.color.white);
+
 
         /*final FloatingActionButton*/ editMedicina = (FloatingActionButton) findViewById(R.id.action_edit_medicine);
         editMedicina.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +146,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
 
                 return true;
+            case R.id.action_mis_medicamentos:
+                startActivity(new Intent(this, DisplayMeds.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -213,7 +222,13 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    public static void  whatever(){
-
+    public  void setOverflowButtonColor(final Toolbar toolbar, final int color) {
+        Drawable drawable = toolbar.getOverflowIcon();
+        if(drawable != null) {
+            drawable = DrawableCompat.wrap(drawable);
+            drawable.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+            DrawableCompat.setTint(drawable, getResources().getColor(R.color.white));
+            toolbar.setOverflowIcon(drawable);
+        }
     }
 }

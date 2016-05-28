@@ -20,21 +20,23 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
+
         android:orientation="vertical"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-        android:paddingTop="20dp">
+        android:paddingTop="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,6 +88,31 @@
             android:onClick="selectDisneaCaminata"
             android:text="Nivel de disnea" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Has hecho ejercicio de brazos?"
+            android:layout_marginTop="6dp"/>
+        <Button
+            android:id="@+id/caminata_brazos_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectBrazosCaminata"
+            android:text="SI/NO" />
+
+
+        <EditText
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/caminata_observaciones_editText"
+            android:hint="Observaciones"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+
 
 
         <Button
@@ -94,6 +121,8 @@
             android:onClick="onSaveCaminata"
             android:text="Añadir caminata"
             android:layout_margin="40dp" />
-    </LinearLayout>
 
+
+    </LinearLayout>
+</ScrollView>
 </android.support.design.widget.CoordinatorLayout>

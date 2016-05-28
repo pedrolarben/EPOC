@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
@@ -26,7 +27,7 @@ public class TablaCaminatasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_caminatas);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_tabla_caminatas);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Mis caminatas");
 
@@ -37,11 +38,14 @@ public class TablaCaminatasActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        datos = EpocDB.getCaminatas();
+        datos =  new ArrayList<Caminata>(EpocDB.getCaminatas());
+        Log.d("datosTablaCaminata", "" + datos.size());
         recyclerView = (RecyclerView) findViewById(R.id.tablaCaminatas_lista);
         recyclerView.setHasFixedSize(true);
 
+       final  AdaptadorTablaCaminatas adaptador = new AdaptadorTablaCaminatas(datos);
 
+        recyclerView.setAdapter(adaptador );
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
@@ -52,6 +56,7 @@ public class TablaCaminatasActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TablaCaminatasActivity.this,FormCaminataActivity.class );
                 startActivity(intent );
+                finish();
                 Log.d("tablaCaminatas","fab");
             }
         });

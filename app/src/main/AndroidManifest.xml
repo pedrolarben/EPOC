@@ -15,14 +15,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,27 +34,32 @@
             android:name=".UI_Documentacion.PdfDocumentacionActivity"
             android:label="@string/title_activity_pdf_documentacion"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UI_Medicinas.DisplayMeds"
             android:label="DisplayMeds"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UI_Medicinas.MedForm"
             android:label="Formulario"
             android:parentActivityName=".UI_Medicinas.DisplayMeds"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UI_Ejercico.ProgramaEjerciciosActivity"
             android:label="@string/title_activity_programa_ejercicios"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UI_Ejercico.TablaCaminatasActivity"
             android:label="@string/title_activity_tabla_caminatas"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="amigosdevaro.com.epoc.MainActivity" />
@@ -62,7 +68,8 @@
             android:name=".UI_Ejercico.FormCaminataActivity"
             android:label="@string/title_activity_form_caminata"
             android:parentActivityName=".UI_Ejercico.TablaCaminatasActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="amigosdevaro.com.epoc.UI_Ejercico.TablaCaminatasActivity" />
