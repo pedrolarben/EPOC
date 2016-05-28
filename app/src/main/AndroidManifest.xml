@@ -43,6 +43,12 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".UI_exacerbaciones.Exacerbaciones"
+            android:label=""
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".UI_Medicinas.MedForm"
             android:label="Formulario"
             android:parentActivityName=".UI_Medicinas.DisplayMeds"

@@ -22,6 +22,7 @@ import amigosdevaro.com.epoc.UI_Medicinas.DisplayMeds;
 import amigosdevaro.com.epoc.DB_SQLite.DbHelper;
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
 import amigosdevaro.com.epoc.TabsBarUI.MiFragmentPagerAdapter;
+import amigosdevaro.com.epoc.UI_exacerbaciones.Exacerbaciones;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -139,9 +140,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_exacerbacion:
-                Snackbar.make(viewPager, "EXACERBACION //TODO", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
+                startActivity(new Intent(this,Exacerbaciones.class));
                 return true;
             case R.id.action_settings:
 
