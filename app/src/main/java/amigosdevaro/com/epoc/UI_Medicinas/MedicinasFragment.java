@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MedicinasFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Farmaco> datos;
     Context context;
+    TextView emptyListText;
 
     public MedicinasFragment() {
         // Required empty public constructor
@@ -57,6 +59,8 @@ public class MedicinasFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.medicinafragment_recyclerview);
         recyclerView.setHasFixedSize(true);
 
+
+
         DefaultItemAnimator animator = new DefaultItemAnimator() {
             @Override
             public boolean canReuseUpdatedViewHolder(RecyclerView.ViewHolder viewHolder) {
@@ -72,7 +76,14 @@ public class MedicinasFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
 
-
+        emptyListText = (TextView) view.findViewById(R.id.no_medicine_text);
+        if(datos.size()==0){
+            recyclerView.setVisibility(View.GONE);
+            emptyListText.setVisibility(View.VISIBLE);
+        }else{
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyListText.setVisibility(View.GONE);
+        }
 
         return view;
     }

@@ -484,7 +484,7 @@ public class MedForm extends AppCompatActivity {
 
 
                 for (int i = 0; i < AdministracionFarmaco.values().length; i++) {
-                    if (TipoFarmaco.values()[i].equals(tipoFarmaco)) {
+                    if (TipoFarmaco.values()[i].equals(administracionFarmaco)) {
                         adminFarmaco.setSelection(i);
                     }
                 }

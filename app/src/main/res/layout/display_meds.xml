@@ -32,6 +32,15 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/view">
     </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:id="@+id/no_medicine_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="\n\n\nNo has guardado ninguna medicina.\n\nAñade medicinas con el botón de añadir."/>
+
 
 
     <android.support.design.widget.FloatingActionButton

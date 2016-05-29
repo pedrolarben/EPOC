@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class DisplayMeds extends AppCompatActivity {
     public static String TAG = "DisplayMeds";
     RecyclerView recyclerView;
     private List<Farmaco> datos;
+    TextView emptyListText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,14 @@ public class DisplayMeds extends AppCompatActivity {
                 startActivity(new Intent(DisplayMeds.this, MedForm.class));
             }
         });
+        emptyListText = (TextView) findViewById(R.id.no_medicine_text);
+        if(datos.size()==0){
+            recyclerView.setVisibility(View.GONE);
+            emptyListText.setVisibility(View.VISIBLE);
+        }else{
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyListText.setVisibility(View.GONE);
+        }
 
     }
 

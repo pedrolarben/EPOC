@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 MainActivity.tab_index=1;
                 startActivity(new Intent(MainActivity.this, DisplayMeds.class));
+                editMedicina.show();
             }
         });
 

@@ -17,6 +17,14 @@ tools:context=".UI_Medicinas.MedicinasFragment"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <TextView
+        android:id="@+id/no_medicine_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="¿No tienes que tomarte ninguna medicina hoy?\n\nAdministra tus medicinas con el botón de editar. "/>
 
 
 

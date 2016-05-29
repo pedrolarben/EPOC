@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import amigosdevaro.com.epoc.tipos.Caminata;
 public class TablaCaminatasActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Caminata> datos;
+    TextView emptyListText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,14 @@ public class TablaCaminatasActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        emptyListText = (TextView) findViewById(R.id.no_medicine_text);
+        if(datos.size()==0){
+            recyclerView.setVisibility(View.GONE);
+            emptyListText.setVisibility(View.VISIBLE);
+        }else{
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyListText.setVisibility(View.GONE);
+        }
     }
 
 }

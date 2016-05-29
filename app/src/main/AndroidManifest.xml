@@ -44,7 +44,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".UI_exacerbaciones.Exacerbaciones"
-            android:label=""
+            android:label="¿No te encuentras bien?"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
