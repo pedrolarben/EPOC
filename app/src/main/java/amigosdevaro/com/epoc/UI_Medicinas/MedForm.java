@@ -461,6 +461,8 @@ public class MedForm extends AppCompatActivity {
         primeraDosis=editar.getPosologia().getPrimeraDosisHora();
         dosisCada = editar.getPosologia().getCadaCuantosDias();
         MedForm.editando = true;
+
+        Log.d("ADMINISTRACION FARMACO",administracionFarmaco.toString());
     }
 
     public void actualizarVista(){

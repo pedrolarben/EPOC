@@ -79,7 +79,7 @@ public class Exacerbaciones extends AppCompatActivity {
 
         } else {
 
-            builder.setMessage("No tienes todos los síntomas propios de una exacerbación. Si no mejoras no dudes en consultar al médico.")
+            builder.setMessage("No tienes todos los síntomas propios de una exacerbación. Pero si no mejoras no dudes en consultar al médico.")
                     .setTitle("Resultado")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -101,7 +101,7 @@ public class Exacerbaciones extends AppCompatActivity {
             LayoutInflater inflater = getActivity().getLayoutInflater();
 
 
-            builder.setView(inflater.inflate(R.layout.dialogo_llamada,null)).setMessage("Deberías ir a emergencia, tienes lo síntomas propios de una exacerbación")
+            builder.setView(inflater.inflate(R.layout.dialogo_llamada,null)).setMessage("Deberías ir a emergencias, tienes lo síntomas propios de una exacerbación.")
                     .setTitle("Resultado")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {

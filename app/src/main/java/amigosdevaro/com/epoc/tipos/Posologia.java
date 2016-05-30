@@ -1,10 +1,11 @@
 package amigosdevaro.com.epoc.tipos;
 
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-public interface Posologia {
+public interface Posologia{
 	Set<DiasSemana> getDiassemanas();
 	int getCadaCuantosDias();
 	GregorianCalendar getPrimeraDosisHora();
