@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -67,7 +68,7 @@ public class FormCaminataActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         disneaValues = new HashMap<Double,String>();
-        disneaValues.put(0.,"sin disnea");
+        disneaValues.put(0.,"Sin disnea");
         disneaValues.put(0.5,"Muy ligera, practicamente no se nota");
         disneaValues.put(1., "Muy ligera");
         disneaValues.put(2.,"Ligera");
@@ -197,7 +198,7 @@ public class FormCaminataActivity extends AppCompatActivity {
         };
 
         TimePickerDialog horas = new TimePickerDialog(this, listener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-        horas.setTitle("¿Cuanto tiempo has estado caminando?");
+        horas.setTitle("¿Cuánto tiempo has estado caminando?");
         horas.setButton(DialogInterface.BUTTON_POSITIVE, "Listo", horas);
         horas.show();
 
@@ -272,11 +273,17 @@ public class FormCaminataActivity extends AppCompatActivity {
 
         }
         if(strDuracion.equals(strDuracionInit)){
-            Toast.makeText(this, "Selecciona la duración",Toast.LENGTH_LONG).show();
+            Toast tDuracion = Toast.makeText(this, "Selecciona la duración",Toast.LENGTH_LONG);
+            TextView v = (TextView) tDuracion.getView().findViewById(android.R.id.message);
+            v.setTextColor(Color.WHITE);
+            tDuracion.show();
             return ;
         }
         if(strDisnea.equals(strDisneaInit)){
-            Toast.makeText(this, "Selecciona el nivel de disnea",Toast.LENGTH_LONG).show();
+            Toast tDisnea = Toast.makeText(this, "Selecciona el nivel de disnea",Toast.LENGTH_LONG);
+            TextView v = (TextView) tDisnea.getView().findViewById(android.R.id.message);
+            v.setTextColor(Color.WHITE);
+            tDisnea.show();
             return ;
         }
         if(strEjercicio.equals(strEjercicioInit)){

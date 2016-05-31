@@ -600,7 +600,7 @@ public class EpocDB {
     public static void restartFarmacosTomado(){
         SQLiteDatabase writableDB = helper.getWritableDatabase();
         if(writableDB!=null){
-            writableDB.execSQL("DROP TABLE IF EXISTS farmacosTomados");
+            writableDB.execSQL("DELETE FROM  farmacosTomados");
         }
         writableDB.close();
     }

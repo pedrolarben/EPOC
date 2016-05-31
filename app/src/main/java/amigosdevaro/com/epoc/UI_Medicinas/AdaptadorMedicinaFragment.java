@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.List;
@@ -84,7 +86,11 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
 
 
                 } else {
-
+                   Toast toast =  Toast.makeText(itemView.getContext(),"Mantén pulsado la toma para desmarcarla. ", Toast.LENGTH_SHORT);
+                    TextView toastTextView = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastTextView.setTextColor(Color.WHITE);
+                    toast.show();
+                    /*
                     Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_blank_circle_outline);
                     d.setColorFilter(itemView.getResources().getColor(R.color.gray), PorterDuff.Mode.MULTIPLY);
 
@@ -92,11 +98,39 @@ public class AdaptadorMedicinaFragment extends RecyclerView.Adapter<AdaptadorMed
                     EpocDB.eliminarFarmacoTomado(datos.get(position), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
 
                     farmacosTomados = EpocDB.getFarmacosTomados();
-                    //    farmacosTomados.remove(farmTom);
+                    */
+
 
                 }
 
 
+            }
+        });
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                boolean contieneFarmaco = false;
+                // FarmacoTomado farmTom = new FarmacoTomadoImpl(datos.get(position),-1,-1);
+                for (FarmacoTomado ft : farmacosTomados) {
+                    if (ft.getFarmaco().getNombre().equals(datos.get(position).getNombre()) &&
+                            ft.getHora().equals(datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY))) {
+                        contieneFarmaco = true;
+                        //  farmTom.setHora(ft.getHora());
+                        //farmTom.setMinutos(ft.getMinutos());
+                        break;
+                    }
+                }
+                if(contieneFarmaco){
+                    Drawable d = itemView.getResources().getDrawable(R.drawable.checkbox_blank_circle_outline);
+                    d.setColorFilter(itemView.getResources().getColor(R.color.gray), PorterDuff.Mode.MULTIPLY);
+
+                    holder.buttonTomado.setImageDrawable(d);
+                    EpocDB.eliminarFarmacoTomado(datos.get(position), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.HOUR_OF_DAY), datos.get(position).getPosologia().getPrimeraDosisHora().get(Calendar.MINUTE));
+
+                    farmacosTomados = EpocDB.getFarmacosTomados();
+
+                }
+                return true;
             }
         });
 

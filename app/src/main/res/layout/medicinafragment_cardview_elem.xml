@@ -45,8 +45,6 @@
                     android:textSize="23sp"
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
-                    android:textColor="@color/white"
-
                     android:gravity="center_vertical|center_horizontal"
                     android:autoText="false" />
                 <TextView
@@ -55,7 +53,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
                     android:layout_gravity="center"
-                    android:textColor="#FFFF"
                     android:gravity="center_vertical|center_horizontal" />
                 <TextView
                     android:id="@+id/medicinafragment_hora"

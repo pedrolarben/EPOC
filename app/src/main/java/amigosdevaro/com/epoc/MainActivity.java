@@ -1,11 +1,13 @@
 package amigosdevaro.com.epoc;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
@@ -16,13 +18,17 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
+import amigosdevaro.com.epoc.Services.DosisAlarm;
+import amigosdevaro.com.epoc.Services.DosisReceiver;
 import amigosdevaro.com.epoc.UI_Medicinas.DisplayMeds;
 import amigosdevaro.com.epoc.DB_SQLite.DbHelper;
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
 import amigosdevaro.com.epoc.TabsBarUI.MiFragmentPagerAdapter;
 import amigosdevaro.com.epoc.UI_exacerbaciones.Exacerbaciones;
+import amigosdevaro.com.epoc.util.ConfiguracionActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("lifecycle","onCreate");
+        Log.d("lifecycle", "onCreate");
         super.onCreate(savedInstanceState);
         Log.d("MainOnCreate", tab_index.toString());
         setContentView(R.layout.activity_main);
@@ -47,10 +53,17 @@ public class MainActivity extends AppCompatActivity {
         EpocDB.initEpocDB(helper);
 
 
+        //DosisAlarm.initAlarm(this);
+
         toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
-        setOverflowButtonColor(toolbar,R.color.white);
+        setOverflowButtonColor(toolbar, R.color.white);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
 
         /*final FloatingActionButton*/ editMedicina = (FloatingActionButton) findViewById(R.id.action_edit_medicine);
         editMedicina.setOnClickListener(new View.OnClickListener() {
@@ -125,8 +138,23 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.pill_white));
         tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.walk));
 
-        editMedicina.show();
-        Log.d("fab", "show");
+        //editMedicina.show();
+
+        DosisReceiver.farmacos=EpocDB.getFarmacosToDisplay();
+
+        //ALARM
+        /*AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(MainActivity.this, DosisReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime(),
+                1 * 60 * 1000,
+                pendingIntent);*/
+        SharedPreferences prefs =
+                this.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        Log.d("bootMainPref",prefs.getBoolean("alarma",true)+"");
+        DosisAlarm.actualiza(this,prefs.getBoolean("alarma",true));
+
 
     }
 
@@ -144,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this,Exacerbaciones.class));
                 return true;
             case R.id.action_settings:
-
+                startActivity(new Intent(this, ConfiguracionActivity.class));
                 return true;
             case R.id.action_mis_medicamentos:
                 startActivity(new Intent(this, DisplayMeds.class));
@@ -171,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }
-
+/*
     @Override
     protected void onResume() {
         Log.d("lifecycle","onResume");
@@ -221,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("lifecycle","onRestart");
         super.onRestart();
     }
-
+    */
     public  void setOverflowButtonColor(final Toolbar toolbar, final int color) {
         Drawable drawable = toolbar.getOverflowIcon();
         if(drawable != null) {
@@ -231,4 +259,5 @@ public class MainActivity extends AppCompatActivity {
             toolbar.setOverflowIcon(drawable);
         }
     }
+
 }

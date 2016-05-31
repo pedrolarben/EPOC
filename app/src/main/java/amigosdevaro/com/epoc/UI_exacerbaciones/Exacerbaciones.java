@@ -10,11 +10,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import amigosdevaro.com.epoc.MainActivity;
 import amigosdevaro.com.epoc.R;
@@ -22,13 +26,8 @@ import amigosdevaro.com.epoc.R;
 public class Exacerbaciones extends AppCompatActivity {
 
     //Switches
-
-    Switch sw1;
-    Switch sw2;
-    Switch sw3;
-    Switch sw4;
-    Switch sw5;
-    Switch sw6;
+    final static Integer NUM_PREGUNTAS = 9;
+    Map<Integer, Boolean> values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +37,13 @@ public class Exacerbaciones extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        sw1 = (Switch) findViewById(R.id.switch_exacerbacion_1);
-        sw2 = (Switch) findViewById(R.id.switch_exacerbacion_2);
-        sw3 = (Switch) findViewById(R.id.switch_exacerbacion_3);
-        sw4 = (Switch) findViewById(R.id.switch_exacerbacion_4);
-        sw5 = (Switch) findViewById(R.id.switch_exacerbacion_5);
-        sw6 = (Switch) findViewById(R.id.switch_exacerbacion_6);
-
+        values = new HashMap<Integer, Boolean>();
+        for(Integer i = 1; i <= NUM_PREGUNTAS; i++ ){
+            values.put(i,false);
+        }
 
 
     }
-
-
-
-
-
-
-
 
 
     //OnClick del boton
@@ -62,32 +51,25 @@ public class Exacerbaciones extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        if (sw1.isChecked() && sw2.isChecked() && sw3.isChecked() && sw4.isChecked() && sw5.isChecked() && sw6.isChecked()) {
+        if (values.get(1) && values.get(2) && values.get(3) && values.get(4) && values.get(5) && values.get(6)) {
 
             DialogoLlamar dialog = new DialogoLlamar();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            dialog.show(fragmentManager,"tagDisnea");
+            dialog.show(fragmentManager, "tagDisnea");
 
 
-            /*builder.setMessage("Deberías consultar al médico, tienes lo síntomas propios de una exacerbación")
-                    .setTitle("Resultado")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    }).create().show();*/
+
 
         } else {
 
-            builder.setMessage("No tienes todos los síntomas propios de una exacerbación. Pero si no mejoras no dudes en consultar al médico.")
+            builder.setMessage("No tienes todos los síntomas propios de una exacerbación. Pero si no mejoras no dudes en consultar con tu médico.")
                     .setTitle("Resultado")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             finish();
                         }
                     }).create().show();
-    }
-
+        }
 
 
     }
@@ -101,7 +83,7 @@ public class Exacerbaciones extends AppCompatActivity {
             LayoutInflater inflater = getActivity().getLayoutInflater();
 
 
-            builder.setView(inflater.inflate(R.layout.dialogo_llamada,null)).setMessage("Deberías ir a emergencias, tienes lo síntomas propios de una exacerbación.")
+            builder.setView(inflater.inflate(R.layout.dialogo_llamada, null)).setMessage("Deberías ir a emergencias, tienes lo síntomas propios de una exacerbación.")
                     .setTitle("Resultado")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -114,12 +96,28 @@ public class Exacerbaciones extends AppCompatActivity {
         }
     }
 
-    public void llamarEmergencia(View view){
+    public void llamarEmergencia(View view) {
         String phone = "902505061";
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
         startActivity(intent);
         finish();
     }
 
+    public void exacerbacionesRadioButtonOnClick(View view) {
+
+        addRadioButtonValue(getResources().getResourceName(view.getId()));
+    }
+
+    public void addRadioButtonValue(String id) {
+        String str = id.substring(id.length()-2).trim();
+        Log.d("exacerbacion",str);
+        String[] array = str.split("");
+        Integer key = new Integer(str.charAt(0)+"");
+        Boolean value = str.charAt(1)=='S';
+        Log.d("exacerbacionkey",key.toString());
+        Log.d("exacerbacionValue",value.toString());
+        this.values.put(key,value);
+
+    }
 
 }

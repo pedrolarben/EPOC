@@ -57,17 +57,25 @@
                         android:textColor="#727272"
                         android:textSize="15dp"
                         android:layout_weight="1"/>
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_1"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton1S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton1N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
+
 
 
                 </LinearLayout>
@@ -88,17 +96,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_2"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton2S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton2N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
                 </LinearLayout>
 
                 <LinearLayout
@@ -117,17 +132,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_3"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton3S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton3N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
 
                 </LinearLayout>
 
@@ -148,17 +170,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_4"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton4S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton4N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
 
 
                 </LinearLayout>
@@ -179,17 +208,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_5"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton5S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton5N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
 
 
                 </LinearLayout>
@@ -210,17 +246,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_6"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton6S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton6N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
 
                 </LinearLayout>
 
@@ -240,17 +283,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_7"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton7S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton7N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
 
                 </LinearLayout>
 
@@ -270,17 +320,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_8"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton8S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton8N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
                 </LinearLayout>
 
                 <LinearLayout
@@ -289,7 +346,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="40dp">
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -300,17 +357,24 @@
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />
-                    <Switch
-                        android:id="@+id/switch_exacerbacion_9"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:checked="false"
-                        android:textOff="No"
-                        android:textOn="Sí"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"/>
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp">
+                        <RadioButton
+                            android:id="@+id/radioButton9S"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Si"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                        <RadioButton
+                            android:id="@+id/radioButton9N"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:onClick="exacerbacionesRadioButtonOnClick"/>
+                    </RadioGroup>
 
 
                 </LinearLayout>
@@ -324,6 +388,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
+                    android:layout_marginTop="0dp"
                     android:onClick="enviarFormulario"
                     android:text="Enviar"
                     android:textColor="#212121"

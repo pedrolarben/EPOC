@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
 import amigosdevaro.com.epoc.R;
+import amigosdevaro.com.epoc.Services.DosisAlarm;
 import amigosdevaro.com.epoc.tipos.DiasSemana;
 import amigosdevaro.com.epoc.tipos.Farmaco;
 import amigosdevaro.com.epoc.tipos.FarmacoImpl;
@@ -64,6 +66,7 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
 
         private TextView txtNombre ;
         private TextView txtDias ;
+        private TextView txtAdministracion ;
         private TextView txtTipo ;
         private ImageButton buttonDelete;
         private ImageButton buttonEdit;
@@ -75,18 +78,12 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
 
             txtNombre = (TextView) itemView.findViewById(R.id.displaymed_nombre);
             txtDias = (TextView) itemView.findViewById(R.id.displaymed_diassemana);
+            txtAdministracion = (TextView) itemView.findViewById(R.id.displaymed_administracion);
             txtTipo = (TextView) itemView.findViewById(R.id.displaymed_tipo);
             buttonDelete= (ImageButton) itemView.findViewById(R.id.displaymed_delete);
             buttonEdit = (ImageButton) itemView.findViewById(R.id.displaymed_edit);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    //TODO://TODO pasar a la actividad MedForms pasandole el farmaco como parametro para que pueda editarlo.
-                    Log.d("DISPLAYMED", "long click item");
-                    return true;
-                }
-            });
+
 
         }
         public void bindTitular(Farmaco f){
@@ -94,6 +91,13 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
             txtNombre.setText(f.getNombre());
             txtTipo.setText(f.getTipo().toString());
             cada = f.getPosologia().getCadaCuantosDias();
+            String administracion = f.getPosologia().getAdministracion().toString();
+            if(administracion=="INHALADORES")
+                administracion = administracion.substring(0,8);
+            else{
+                administracion = administracion.replace("_"," ");
+            }
+            txtAdministracion.setText(administracion);
             String diasSemanas = "";
             for(DiasSemana dia : DiasSemana.values()){
                 if(f.getPosologia().getDiassemanas().contains(dia)){
@@ -140,6 +144,10 @@ public class AdaptadorDisplayMed extends RecyclerView.Adapter<AdaptadorDisplayMe
         notifyItemRemoved(position);
         notifyDataSetChanged();
         Log.d("remove", position + " eliminado");
-        notifyItemRangeChanged(position, datos.size()-1);
+        notifyItemRangeChanged(position, datos.size() - 1);
+
+        SharedPreferences prefs =
+                context.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        DosisAlarm.actualiza(context,prefs.getBoolean("alarma",true));
     }
 }

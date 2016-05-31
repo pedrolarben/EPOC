@@ -48,7 +48,7 @@ public class AdaptadorTablaCaminatas extends RecyclerView.Adapter<AdaptadorTabla
     }
     public void update(int i){
         notifyItemRemoved(i);
-
+        notifyDataSetChanged();
     }
 
 

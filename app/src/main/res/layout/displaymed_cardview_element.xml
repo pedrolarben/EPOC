@@ -49,7 +49,6 @@
                     android:textSize="23sp"
                     android:layout_margin="3dp"
                     android:layout_gravity="center"
-                    android:textColor="@color/white"
 
                     android:gravity="center_vertical|center_horizontal"
                     android:autoText="false" />
@@ -59,9 +58,16 @@
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
                     android:layout_gravity="center"
-                    android:textColor="#FFFF"
 
                     android:gravity="center_vertical|center_horizontal" />
+                    <TextView
+                        android:id="@+id/displaymed_administracion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:layout_gravity="center"
+
+                        android:gravity="center_vertical|center_horizontal" />
                 </LinearLayout>
                 <TextView
                     android:id="@+id/displaymed_diassemana"
@@ -71,7 +77,6 @@
 
                     android:textSize="13sp"
                     android:layout_gravity="center"
-                    android:textColor="@color/white"
                     android:paddingBottom="8dp"/>
             </LinearLayout>
             <LinearLayout

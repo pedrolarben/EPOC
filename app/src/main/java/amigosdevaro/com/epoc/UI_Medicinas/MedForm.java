@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -28,6 +29,8 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import amigosdevaro.com.epoc.MainActivity;
+import amigosdevaro.com.epoc.Services.DosisAlarm;
 import amigosdevaro.com.epoc.tipos.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -192,6 +195,7 @@ public class MedForm extends AppCompatActivity {
                             }
                         }
                         //Save new data
+
                         farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
                         EpocDB.addFarmaco(farmaco);
                     } else {
@@ -216,6 +220,13 @@ public class MedForm extends AppCompatActivity {
                         farmaco = new FarmacoImpl(nombreMedicamento, tipoFarmaco, posologia);
                         EpocDB.updateFarmaco(editar, farmaco);
                     }
+
+                    SharedPreferences prefs =
+                            MedForm.this.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+                    DosisAlarm.actualiza(MedForm.this, prefs.getBoolean("alarma",true));
+
+
                     //Goes back to main activity
                     finish();
                     startActivity(new Intent(MedForm.this, DisplayMeds.class));
@@ -486,7 +497,7 @@ public class MedForm extends AppCompatActivity {
 
 
                 for (int i = 0; i < AdministracionFarmaco.values().length; i++) {
-                    if (TipoFarmaco.values()[i].equals(administracionFarmaco)) {
+                    if (AdministracionFarmaco.values()[i].equals(administracionFarmaco)) {
                         adminFarmaco.setSelection(i);
                     }
                 }

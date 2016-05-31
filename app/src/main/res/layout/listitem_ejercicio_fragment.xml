@@ -45,7 +45,6 @@
                 android:textSize="23sp"
                 android:layout_margin="3dp"
                 android:layout_gravity="center"
-                android:textColor="#FFFFFF"
 
                 android:gravity="center_horizontal" />
 
