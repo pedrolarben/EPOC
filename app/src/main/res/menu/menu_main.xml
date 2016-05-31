@@ -19,4 +19,9 @@
         android:orderInCategory="1"
         app:showAsAction="never"
         android:title="@string/mis_medicamentos"/>
+    <item android:id="@+id/action_acercade"
+        android:orderInCategory="99"
+        android:icon="@android:drawable/ic_menu_info_details"
+        app:showAsAction="never"
+        android:title="acerca de"/>
 </menu>

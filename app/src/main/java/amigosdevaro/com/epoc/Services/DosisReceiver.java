@@ -50,7 +50,7 @@ public class DosisReceiver extends BroadcastReceiver {
                                     .setContentTitle("EasyEpoc")
                                     .setContentText("Tomar Dosis: "+f.getNombre())
                                     .setContentInfo("")
-                                    .setTicker("Nueva toma!");
+                                    .setTicker("Nueva toma!").setAutoCancel(true);
                     NotificationManager mNotificationManager =
                             (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     Intent notIntent =

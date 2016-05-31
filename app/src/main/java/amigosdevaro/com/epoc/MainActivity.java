@@ -23,6 +23,7 @@ import android.view.WindowManager;
 
 import amigosdevaro.com.epoc.Services.DosisAlarm;
 import amigosdevaro.com.epoc.Services.DosisReceiver;
+import amigosdevaro.com.epoc.UI_Documentacion.PdfDocumentacionActivity;
 import amigosdevaro.com.epoc.UI_Medicinas.DisplayMeds;
 import amigosdevaro.com.epoc.DB_SQLite.DbHelper;
 import amigosdevaro.com.epoc.DB_SQLite.EpocDB;
@@ -177,7 +178,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_mis_medicamentos:
                 startActivity(new Intent(this, DisplayMeds.class));
                 return true;
-
+            case R.id.action_acercade:
+                Intent intent = new Intent(this, PdfDocumentacionActivity.class);
+                intent.putExtra("acercade", 0);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

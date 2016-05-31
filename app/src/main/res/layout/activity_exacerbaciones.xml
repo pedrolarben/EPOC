@@ -353,7 +353,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:text="¿Tienes mas sueño  de lo habitual?"
+                        android:text="¿Tienes más sueño  de lo habitual?"
                         android:textAlignment="center"
                         android:textColor="#727272"
                         android:textSize="15dp" />

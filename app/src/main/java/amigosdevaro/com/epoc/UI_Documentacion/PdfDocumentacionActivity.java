@@ -10,6 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -55,6 +57,10 @@ public class PdfDocumentacionActivity extends AppCompatActivity {
             text = getTextEjercicio(intent).get(0);
             posText = new Integer(getTextEjercicio(intent).get(1));
            title = getResources().getStringArray(R.array.indice_ejercicio)[posText];
+        }
+        if(intent.hasExtra("acercade")){
+            text="acerca-de.html";
+            title = "Acerca de ";
         }
 
         url = getResources().getString(R.string.doc_url_local) + text;
@@ -111,5 +117,18 @@ public class PdfDocumentacionActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         webView.loadUrl(url);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();
+            Log.d("flechi", "onBackPressed");
+            return true;
+        }else {
+
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

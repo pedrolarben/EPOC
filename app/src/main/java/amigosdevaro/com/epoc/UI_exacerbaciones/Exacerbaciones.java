@@ -18,6 +18,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import amigosdevaro.com.epoc.MainActivity;
@@ -51,16 +52,43 @@ public class Exacerbaciones extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        if (values.get(1) && values.get(2) && values.get(3) && values.get(4) && values.get(5) && values.get(6)) {
+        if ((values.get(1) && values.get(2) && values.get(3))||(values.get(1) &&  values.get(4)&&values.get(5))||(values.get(2) &&  values.get(4)&&values.get(5))||(values.get(3) &&  values.get(4)&&values.get(5)) ) {
 
             DialogoLlamar dialog = new DialogoLlamar();
             FragmentManager fragmentManager = getSupportFragmentManager();
             dialog.show(fragmentManager, "tagDisnea");
 
 
+        } else if(!values.values().contains(true)){
+            builder.setMessage("Estas sano como una rosa. Disfruta del día.\n\nPor cierto, hoy es un magnífico día para salir a caminar, ¿no crees?")
+                    .setTitle("Resultado")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    }).create().show();
 
+        }
+        else  if (!(values.get(1) && values.get(2) && values.get(3) && values.get(4) && values.get(5) && values.get(6))) {
+            builder.setMessage("Parece que no estás sufriendo una exacerbación. Hidratate, come sano, haz ejercicio y no fumes. Esto te ayudará a encontrarte mejor.")
+                    .setTitle("Resultado")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    }).create().show();
 
-        } else {
+        }else
+        if(values.get(1) || values.get(2) || values.get(3) ){
+            builder.setMessage("Tienes algúnos sintomas the relativa importancia. Te recomendamos que consultes con tu médico.")
+                    .setTitle("Resultado")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    }).create().show();
+        }
+            else  {
 
             builder.setMessage("No tienes todos los síntomas propios de una exacerbación. Pero si no mejoras no dudes en consultar con tu médico.")
                     .setTitle("Resultado")
